@@ -1,0 +1,39 @@
+@import "bootstrap";
+@import "variables";
+@import "top-menu.scss";
+@import "products";
+
+#content {
+  margin-top: 60px;
+}
+
+.left-menu {
+  width: 260px;
+  float: left;
+  top: 75px;
+  left: 15px;
+  .nav-pills {
+    a {
+      background: #fff;
+      color: $grey;
+      border-left: 2px solid #fff;
+      border-radius: 0px;
+      &.active {
+        color: $green;
+        border-left: 2px solid $green;
+        background: #fff;
+      }
+    }
+  }
+}
+
+.products {
+  width: 60%;
+  margin-left: 260px;
+  float: left;
+  h2 {
+    border-bottom: 2px solid $green;
+    padding-bottom: 4px;
+    margin-top: 15px;
+  }
+}

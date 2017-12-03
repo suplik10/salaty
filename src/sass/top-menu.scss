@@ -1,0 +1,22 @@
+#top-menu {
+  background: $green;
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        color: #fff;
+        -webkit-transition: color 0.5s;
+        -moz-transition: color 0.5s;
+        -ms-transition: color 0.5s;
+        -o-transition: color 0.5s;
+        transition: color 0.5s;
+        border-bottom: 2px solid $green;
+        &:hover{
+          color: #ddd;
+        }
+        &.active {
+          border-bottom: 2px solid #fff;
+        }
+      }
+    }
+  }
+}

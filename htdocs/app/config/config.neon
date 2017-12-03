@@ -1,0 +1,23 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+# Nastavení výchozích chybových hlášek pro formuláře.
+forms:
+	messages:
+		REQUIRED: 'Toto pole je povinné.'
+		EMAIL: 'Zadejte platný email.'
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	router: App\RouterFactory::createRouter
+
+	- App\Model\UserManager
