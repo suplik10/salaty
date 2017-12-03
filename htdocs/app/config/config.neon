@@ -21,3 +21,4 @@ services:
 	router: App\RouterFactory::createRouter
 
 	- App\Model\UserManager
+	- App\Forms\UserFormFactory
