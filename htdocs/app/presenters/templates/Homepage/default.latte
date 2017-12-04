@@ -1,25 +1,120 @@
 {block content}
+    <div class="mb30">
+        <ul id="lightSlider-main">
+            <li>
+                <div class="text-center">
+                    <img class="img-responsive" src="http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg">
+                </div>
+                <p class="text-center ls-caption"><a class="btn btn-primary" href="{plink Homepage:offers}">NABÍDKA</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="container mb30">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Chcete od nás každý týden dostávat naši nabídku ?</h4>
+                        <input placeholder="Váš e-mail">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <ul id="lightSlider-interests">
+                            <li>
+                                <h4 class="text-center">Věděli jste, že ...</h4>
+                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                                    fermentum nisi ac commodo</p>
+                            </li>
+                            <li>
+                                <h4 class="text-center">Věděli jste, že ...</h4>
+                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                                    fermentum nisi ac commodo</p>
+                            </li>
+                            <li>
+                                <h4 class="text-center">Věděli jste, že ...</h4>
+                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                                    fermentum nisi ac commodo</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center"><a n:if="$user->isLoggedIn()" href="{plink Sign:profile}">Můj
+                                profil</a><a n:if="!$user->isLoggedIn()" href="{plink Sign:in}">Přihlásit se</a> | <a
+                                    n:if="$user->isLoggedIn()" href="{plink Sign:out}">Odhlásit</a><a
+                                    n:if="!$user->isLoggedIn()" href="{plink Sign:up}">Založit nový účet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax pt30 mb30">
+        <div class="container bg-white p30">
+            <h2>DÁMESALÁT Příběh</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                fermentum nisi ac commodo
+                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
+                venenatis
+                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
+        </div>
+    </div>
     <div class="container">
         <ul id="lightSlider">
             <li>
-                <h3>First Slide</h3>
-                <p>Lorem ipsum Cupidatat quis pariatur anim.</p>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
             </li>
             <li>
-                <h3>Second Slide</h3>
-                <p>Lorem ipsum Excepteur amet adipisicing fugiat velit nisi.</p>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
             </li>
             <li>
-                <h3>TH Slide</h3>
-                <p>Lorem ipsum Excepteur amet adipisicing fugiat velit nisi.</p>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
             </li>
             <li>
-                <h3>Ft Slide</h3>
-                <p>Lorem ipsum Excepteur amet adipisicing fugiat velit nisi.</p>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
             </li>
             <li>
-                <h3>Fft Slide</h3>
-                <p>Lorem ipsum Excepteur amet adipisicing fugiat velit nisi.</p>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
+            </li>
+            <li>
+                <div class="text-center">
+                    <img class="img-responsive"
+                         src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                </div>
+                <h3 class="text-center">Caesar Salát</h3>
+                <p class="text-center">99 Kč</p>
             </li>
 
         </ul>

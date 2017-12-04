@@ -1,5 +1,8 @@
 #top-menu {
-  background: $green;
+  background: $dark-grey;
+  .navbar-brand{
+    color: #fff;
+  }
   .navbar-nav {
     .nav-item {
       .nav-link {
@@ -9,7 +12,7 @@
         -ms-transition: color 0.5s;
         -o-transition: color 0.5s;
         transition: color 0.5s;
-        border-bottom: 2px solid $green;
+        border-bottom: 2px solid $dark-grey;
         &:hover{
           color: #ddd;
         }

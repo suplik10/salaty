@@ -7249,7 +7249,9 @@ a.text-dark:focus, a.text-dark:hover {
 
 /*# sourceMappingURL=bootstrap.css.map */
 #top-menu {
-  background: #03bf00; }
+  background: #4c4c4c; }
+  #top-menu .navbar-brand {
+    color: #fff; }
   #top-menu .navbar-nav .nav-item .nav-link {
     color: #fff;
     -webkit-transition: color 0.5s;
@@ -7257,11 +7259,23 @@ a.text-dark:focus, a.text-dark:hover {
     -ms-transition: color 0.5s;
     -o-transition: color 0.5s;
     transition: color 0.5s;
-    border-bottom: 2px solid #03bf00; }
+    border-bottom: 2px solid #4c4c4c; }
     #top-menu .navbar-nav .nav-item .nav-link:hover {
       color: #ddd; }
     #top-menu .navbar-nav .nav-item .nav-link.active {
       border-bottom: 2px solid #fff; }
+
+#footer {
+  background-color: #4c4c4c;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 20px; }
+  #footer h2, #footer p {
+    color: #fff; }
+  #footer a {
+    color: #fff; }
+    #footer a:hover, #footer a:focus {
+      color: #fff; }
 
 .product {
   margin-top: 10px; }
@@ -9590,8 +9604,44 @@ a.text-dark:focus, a.text-dark:hover {
   overflow: visible;
   clip: auto; }
 
+/************  GENERAL CLASSES  *************/
+.pt30 {
+  padding-top: 30px; }
+
+.p30 {
+  padding: 30px; }
+
+.mt30 {
+  margin-top: 30px; }
+
+.mb30 {
+  margin-bottom: 30px; }
+
+.bg-white {
+  background: #fff; }
+
+.parallax {
+  /* The image used */
+  background-image: url("http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg");
+  min-height: 350px;
+  /* Full height */
+  height: 100%;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
 #content {
-  margin-top: 60px; }
+  margin-top: 58px; }
+
+.lSAction > a {
+  background-image: none !important; }
+
+.ls-caption {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 96px); }
 
 .left-menu {
   width: 260px;

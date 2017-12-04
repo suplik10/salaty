@@ -13,7 +13,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     private $productId;
 
-    public function renderDefault()
+    public function renderOffers()
     {
         $this->template->productId = $this->productId;
     }
