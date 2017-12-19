@@ -16,12 +16,20 @@
         DAMESALAT.CZ
     </a>
 
-    <ul class="navbar-nav justify-content-end">
+    <ul class="navbar-nav justify-content-end mr30">
         <li class="nav-item">
             <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{plink Homepage:default}">KONTAKTY</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav justify-content-end">
+        <li class="nav-item">
+            <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">Přihlášení</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{plink Homepage:default}">Registrace</a>
         </li>
     </ul>
 </nav>
