@@ -1,0 +1,85 @@
+{block content}
+    <div class="container">
+        <h1 class="text-center">Editace účtu</h1>
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                {form editProfile}
+                    <div n:class="$form['firstname']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label firstname}
+                            </div>
+                            {input firstname, class=>'form-control'}
+                            <div n:if="$form['firstname']->hasErrors()" class="input-group-addon error">
+                                {inputError firstname}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['lastname']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label lastname}
+                            </div>
+                            {input lastname, class=>'form-control'}
+                            <div n:if="$form['lastname']->hasErrors()" class="input-group-addon error">
+                                {inputError lastname}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['email']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label email}
+                            </div>
+                            {input email, class=>'form-control'}
+                            <div n:if="$form['email']->hasErrors()" class="input-group-addon error">
+                                {inputError email}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['phone']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label phone}
+                            </div>
+                            {input phone, class=>'form-control'}
+                            <div n:if="$form['phone']->hasErrors()" class="input-group-addon error">
+                                {inputError phone}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['old_password']->hasErrors() ? has-error, form-group">
+                        <div n:class="$form['old_password']->hasErrors() ? input-group">
+                            {input old_password, class=>'form-control'}
+                            <div n:if="$form['old_password']->hasErrors()" class="input-group-addon error">
+                                {inputError old_password}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['new_password']->hasErrors() ? has-error, form-group">
+                        <div n:class="$form['new_password']->hasErrors() ? input-group">
+                            {input new_password, class=>'form-control'}
+                            <div n:if="$form['new_password']->hasErrors()" class="input-group-addon error">
+                                {inputError new_password}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['new_password_2']->hasErrors() ? has-error, form-group">
+                        <div n:class="$form['new_password_2']->hasErrors() ? input-group">
+                            {input new_password_2, class=>'form-control'}
+                            <div n:if="$form['new_password_2']->hasErrors()" class="input-group-addon error">
+                                {inputError new_password_2}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {input newsletter}
+                    </div>
+                    <div class="form-group">
+                        {input send}
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+{/block}

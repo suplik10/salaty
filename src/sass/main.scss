@@ -3,15 +3,25 @@
 @import "top-menu";
 @import "footer";
 @import "products";
+@import "alert";
+@import "form";
 @import "fontawesome/font-awesome";
 
 /************  GENERAL CLASSES  *************/
+.pt15 {
+  padding-top: 15px;
+}
+
 .pt30 {
   padding-top: 30px;
 }
 
 .p30 {
   padding: 30px;
+}
+
+.pb30 {
+  padding-bottom: 30px;
 }
 
 .mt30 {
@@ -22,19 +32,31 @@
   margin-bottom: 30px;
 }
 
+.mb-30 {
+  margin-bottom: -30px;
+}
+
 .mr30 {
   margin-right: 30px;
+}
+
+.mr50 {
+  margin-right: 50px;
 }
 
 .bg-white {
   background: #fff;
 }
 
+h1 {
+  color: $dark-grey;
+}
+
 .parallax {
   /* The image used */
   background-image: url("http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg");
 
-  min-height: 350px;
+  min-height: 380px;
 
   /* Full height */
   height: 100%;

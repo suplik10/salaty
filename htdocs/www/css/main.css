@@ -7280,6 +7280,15 @@ a.text-dark:focus, a.text-dark:hover {
 .product {
   margin-top: 10px; }
 
+.alert {
+  margin-bottom: 16px;
+  top: 8px;
+  margin-left: 15px;
+  margin-right: 15px; }
+
+label {
+  margin-bottom: 0px; }
+
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -9605,11 +9614,17 @@ a.text-dark:focus, a.text-dark:hover {
   clip: auto; }
 
 /************  GENERAL CLASSES  *************/
+.pt15 {
+  padding-top: 15px; }
+
 .pt30 {
   padding-top: 30px; }
 
 .p30 {
   padding: 30px; }
+
+.pb30 {
+  padding-bottom: 30px; }
 
 .mt30 {
   margin-top: 30px; }
@@ -9617,16 +9632,25 @@ a.text-dark:focus, a.text-dark:hover {
 .mb30 {
   margin-bottom: 30px; }
 
+.mb-30 {
+  margin-bottom: -30px; }
+
 .mr30 {
   margin-right: 30px; }
+
+.mr50 {
+  margin-right: 50px; }
 
 .bg-white {
   background: #fff; }
 
+h1 {
+  color: #4c4c4c; }
+
 .parallax {
   /* The image used */
   background-image: url("http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg");
-  min-height: 350px;
+  min-height: 380px;
   /* Full height */
   height: 100%;
   /* Create the parallax scrolling effect */

@@ -21632,6 +21632,7 @@ var bootstrap = function(a, b) {
         enableDrag: !0,
         freeMove: !0,
         swipeThreshold: 40,
+        pauseOnHover: !0,
         responsive: []
     }), $("#lightSlider").lightSlider({
         item: 3,
@@ -21647,6 +21648,7 @@ var bootstrap = function(a, b) {
         enableDrag: !0,
         freeMove: !0,
         swipeThreshold: 40,
+        pauseOnHover: !0,
         responsive: [ {
             breakpoint: 991,
             settings: {

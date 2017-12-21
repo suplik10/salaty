@@ -10,6 +10,7 @@ namespace App\Model;
 
 use Nette\Security\AuthenticationException;
 use Nette\Security\Identity;
+use Nette\Security\Passwords;
 
 class UserManager extends \Nette\Object implements \Nette\Security\IAuthenticator
 {
@@ -36,11 +37,14 @@ class UserManager extends \Nette\Object implements \Nette\Security\IAuthenticato
             throw new AuthenticationException('Uživatelské jméno nebo heslo nesouhlasí.');
         } elseif (!Passwords::verify($password, $user->password)) {
             throw new AuthenticationException('Uživatelské jméno nebo heslo nesouhlasí.');
+        } elseif($user->active != 1){
+            throw new AuthenticationException('Váš účet čeká na aktivaci. ');
         }
         $arr = [
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'email' => $user->email,
+            'phone' => $user->phone
         ];
 
         return new Identity($user->id, [], $arr);

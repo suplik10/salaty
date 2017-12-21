@@ -34,6 +34,7 @@ $(document).ready(function () {
         enableDrag: true,
         freeMove: true,
         swipeThreshold: 40,
+        pauseOnHover: true,
 
         responsive: [],
     });
@@ -57,6 +58,7 @@ $(document).ready(function () {
         enableDrag: true,
         freeMove: true,
         swipeThreshold: 40,
+        pauseOnHover: true,
 
         responsive: [
             {
