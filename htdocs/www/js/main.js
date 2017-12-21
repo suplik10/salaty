@@ -21606,7 +21606,7 @@ var bootstrap = function(a, b) {
         return a(c || b);
     }, p;
 }), $(document).ready(function() {
-    $("#lightSlider-main").lightSlider({
+    $('[data-toggle="tooltip"]').tooltip(), $("#lightSlider-main").lightSlider({
         item: 1,
         autoWidth: !0,
         controls: !0,
@@ -21632,6 +21632,7 @@ var bootstrap = function(a, b) {
         enableDrag: !0,
         freeMove: !0,
         swipeThreshold: 40,
+        pauseOnHover: !0,
         responsive: []
     }), $("#lightSlider").lightSlider({
         item: 3,
@@ -21647,6 +21648,7 @@ var bootstrap = function(a, b) {
         enableDrag: !0,
         freeMove: !0,
         swipeThreshold: 40,
+        pauseOnHover: !0,
         responsive: [ {
             breakpoint: 991,
             settings: {
@@ -22422,7 +22424,7 @@ var bootstrap = function(a, b) {
         type: "POST",
         url: b,
         success: function() {
-            $("#exampleModal").modal();
+            $("#productModal").modal();
         }
     });
 });

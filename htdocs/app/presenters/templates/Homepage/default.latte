@@ -1,55 +1,57 @@
 {block content}
     <div class="mb30">
-        <ul id="lightSlider-main">
-            <li>
-                <div class="text-center">
-                    <img class="img-responsive" src="http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg">
-                </div>
-                <p class="text-center ls-caption"><a class="btn btn-primary" href="{plink Homepage:offers}">NABÍDKA</a>
-                </p>
-            </li>
-        </ul>
-    </div>
-    <div class="container mb30">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Chcete od nás každý týden dostávat naši nabídku ?</h4>
-                        <input placeholder="Váš e-mail">
+        <div id="carousel-main" class="carousel" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="img-d-block w-100" src="http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="text-center ls-caption"><a class="btn btn-primary" href="{plink Homepage:offers}">NABÍDKA</a>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+        </div>
+    </div>
+    <div class="container mb30">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Chcete od nás každý týden dostávat naši nabídku ?</h4>
+                        {form signForNewsletter}
+                            <div class="form-group">
+                                {input email, class=>'form-control'}
+                            </div>
+                            <div class="form-group">
+                                {input send}
+                            </div>
+                        {/form}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <ul id="lightSlider-interests">
                             <li>
                                 <h4 class="text-center">Věděli jste, že ...</h4>
-                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                    fermentum nisi ac commodo</p>
+                                <p class="text-center">v naší nabídce můžete najít lehké svěží čerstvé saláty k vaší svačince tak i saláty vhodné jako oběd? Máte chuť na něco teplého? Naše těstovinové saláty jsou též vhodné pro ohřev např v MW.</p>
                             </li>
                             <li>
                                 <h4 class="text-center">Věděli jste, že ...</h4>
-                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                    fermentum nisi ac commodo</p>
-                            </li>
-                            <li>
-                                <h4 class="text-center">Věděli jste, že ...</h4>
-                                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                    fermentum nisi ac commodo</p>
+                                <p class="text-center">některé naše saláty nesou název po souostroví Kanárské ostrovy? Takto také vznikly první saláty, kdy jsme čerpali inspirace z místních regionálních zdrojů.  </p>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center"><a n:if="$user->isLoggedIn()" href="{plink Sign:profile}">Můj
-                                profil</a><a n:if="!$user->isLoggedIn()" href="{plink Sign:in}">Přihlásit se</a> | <a
-                                    n:if="$user->isLoggedIn()" href="{plink Sign:out}">Odhlásit</a><a
-                                    n:if="!$user->isLoggedIn()" href="{plink Sign:up}">Založit nový účet</a>
+                                účet</a><a n:if="!$user->isLoggedIn()" href="{plink Sign:in}">Přihlášení</a> | <a
+                                    n:if="$user->isLoggedIn()" href="{plink Sign:out}">Odhlášení</a><a
+                                    n:if="!$user->isLoggedIn()" href="{plink Sign:up}">Registrace</a>
                         </div>
                     </div>
                 </div>
@@ -58,12 +60,18 @@
     </div>
     <div class="parallax pt30 mb30">
         <div class="container bg-white p30">
-            <h2>DÁMESALÁT Příběh</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                fermentum nisi ac commodo
-                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                venenatis
-                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
+            <h2>Náš příběh</h2>
+            <p>„Frescura y calidad en primer lugar“ (čerstvost a kvalita na prvním místě), bylo rčení našeho vzoru,
+                majitele Ensaladas de Gran Canaria. <br/><br/>Přes zimní období zpracováváme rajské, okurky
+
+                a papriky právě z ostrova Gran Canaria, kde zelenina zde dozrává na sluníčku přirozenou cestou. V letním
+                období kupujeme suroviny převážně od českých pěstitelů. <br/><br/>Naším záměrem je obohatit jídelníček
+                kvalitní čerstvou zeleninou a čerstvým ovocem v kombinaci se zdrojem bílkovin. Skvělé receptury,
+                kombinace chutí a čerstvost dělají z našich salátů vždy originál. Naše čerstvé zeleninové a ovocné
+                saláty a RAW zákusky jsou vyráběny z prvotřídních surovin bez přidání konzervačních látek. Jsou
+                připravovány brzy ráno tak, aby cesta z výroby k zákazníkovi byla co nejkratší čímž zaručujeme maximální
+                čerstvost.
+            </p>
         </div>
     </div>
     <div class="container">

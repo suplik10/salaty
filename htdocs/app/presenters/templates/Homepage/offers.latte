@@ -2,190 +2,85 @@
     <div class="container-fluid d-inline-block">
         <nav class="left-menu fixed-top" id="categories">
             <nav class="nav nav-pills flex-column">
-                <a class="nav-link" href="#salat">Salát</a>
-                <a class="nav-link" href="#salat2">Salát2</a>
+                <a class="nav-link" n:foreach="$categories as $catName => $category"
+                   href="#{$catName|webalize}">{$catName}</a>
             </nav>
         </nav>
 
         <div class="products">
-            <h2 id="salat">Saláty</h2>
-            <div class="row">
-                <div class="col-sm-4 product">
+            <div n:foreach="$categories as $categoryName => $products">
+                <h2 id="{$categoryName|webalize}">{$categoryName}</h2>
+                <div n:foreach="$products as $product" class="col-xl-4 col-lg-6 col-md-12 product">
                     <div class="card">
                         <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
+                             src="{$product['img']}">
                         <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a data-link="{link getProductData!, 1}" class="btn order-product btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a data-link="{link getProductData!, 2}" class="btn order-product btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <h2 id="salat2">Saláty2</h2>
-            <div class="row">
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="https://www.panerabread.com/foundation/menu/grid/caesar-salad-whole.jpg/_jcr_content/renditions/caesar-salad-whole.desktop.jpeg">
-                        <div class="card-body">
-                            <h3 class="card-title">Caesar salát</h3>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                fermentum nisi ac commodo
-                                sagittis. Morbi et magna vitae ligula congue tempus. Sed quis augue non eros hendrerit
-                                venenatis
-                                quis at erat. Curabitur scelerisque non nisi quis iaculis. </p>
-                            <a href="" class="btn btn-primary">Objednat</a>
+                            <h3 class="card-title">{$product['name']}</h3>
+                            <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
+                            <p class="card-text mt15">{$product['description']} </p>
+                            <a data-link="{link getProductData!, $product['id']}" class="btn order-product btn-primary">Objednat</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="cart">
+            <div n:if="$user->isLoggedIn()">
+                <h2>Košík <span class="fa fa-shopping-cart"></span></h2>
+                {snippet cart}
+                    <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th colspan="4">{date('d. m. Y',strtotime($date))}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr n:foreach="$cartProducts as $cartProduct">
+                            <th>{$cartProduct['name']}</th>
+                            <td>x{$cartProduct['count']}</td>
+                            <td>{$cartProduct['price']*$cartProduct['count']} Kč</td>
+                            <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}" data-toggle="tooltip" title="Odebrat z košíku" data-placement="top"><span class="fa fa-times red"></span></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {/snippet}
+                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary">Vysypat košík</a>
+                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary">Objednat</a>
+            </div>
+        </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 {snippet product-order}
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="productModalLabel">{$productName}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                {form addToCartForm}
                     <div class="modal-body">
-                        {$productId}
+                        <div class="form-group row">
+                            {label date, class=>'col-sm-2 col-form-label'}
+                            <div class="col-md-10">
+                                {input date, class=>'form-control'}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            {label count, class=>'col-sm-2 col-form-label'}
+                            <div class="col-md-10">
+                                {input count, class=>'form-control'}
+                            </div>
+                        </div>
+                        {input productId, value=> $productId}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                        {input send, class=>'btn btn-primary'}
                     </div>
+                {/form}
                 {/snippet}
             </div>
         </div>

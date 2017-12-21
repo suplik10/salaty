@@ -3,15 +3,35 @@
 @import "top-menu";
 @import "footer";
 @import "products";
+@import "alert";
+@import "form";
+@import "cart";
+@import "buttons";
 @import "fontawesome/font-awesome";
 
 /************  GENERAL CLASSES  *************/
+body {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.pt15 {
+  padding-top: 15px;
+}
+
 .pt30 {
   padding-top: 30px;
 }
 
 .p30 {
   padding: 30px;
+}
+
+.pb30 {
+  padding-bottom: 30px;
+}
+
+.mt15 {
+  margin-top: 15px;
 }
 
 .mt30 {
@@ -22,19 +42,31 @@
   margin-bottom: 30px;
 }
 
+.mb-30 {
+  margin-bottom: -30px;
+}
+
 .mr30 {
   margin-right: 30px;
+}
+
+.mr50 {
+  margin-right: 50px;
 }
 
 .bg-white {
   background: #fff;
 }
 
+h1 {
+  color: $dark-grey;
+}
+
 .parallax {
   /* The image used */
   background-image: url("http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg");
 
-  min-height: 350px;
+  min-height: 380px;
 
   /* Full height */
   height: 100%;
@@ -61,33 +93,12 @@
   left: calc(50% - 96px);
 }
 
-.left-menu {
-  width: 260px;
-  float: left;
-  top: 75px;
-  left: 15px;
-  .nav-pills {
-    a {
-      background: #fff;
-      color: $grey;
-      border-left: 2px solid #fff;
-      border-radius: 0px;
-      &.active {
-        color: $green;
-        border-left: 2px solid $green;
-        background: #fff;
-      }
-    }
-  }
-}
 
-.products {
-  width: 60%;
-  margin-left: 260px;
-  float: left;
-  h2 {
-    border-bottom: 2px solid $green;
-    padding-bottom: 4px;
-    margin-top: 15px;
+
+.navbar-nav {
+  flex-direction: row;
+  .nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem;
   }
 }

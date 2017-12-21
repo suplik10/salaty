@@ -1,0 +1,56 @@
+{block content}
+    <div class="parallax pt30 pb30 mb-30">
+        <div class="container bg-white text-center">
+            <h1 class="pt15">Registrace</h1>
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    {form signUpForm}
+                        <div n:class="$form['firstname']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['firstname']->hasErrors() ? input-group">
+                                {input firstname, class=>'form-control'}
+                                <div n:if="$form['firstname']->hasErrors()" class="input-group-addon error">
+                                    {inputError firstname}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['lastname']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['lastname']->hasErrors() ? input-group">
+                                {input lastname, class=>'form-control'}
+                                <div n:if="$form['lastname']->hasErrors()" class="input-group-addon error">
+                                    {inputError lastname}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['email']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['email']->hasErrors() ? input-group">
+                                {input email, class=>'form-control'}
+                                <div n:if="$form['email']->hasErrors()" class="input-group-addon error">
+                                    {inputError email}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['phone']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['phone']->hasErrors() ? input-group">
+                                {input phone, class=>'form-control'}
+                                <div n:if="$form['phone']->hasErrors()" class="input-group-addon error">
+                                    {inputError phone}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['password']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['password']->hasErrors() ? input-group">
+                                {input password, class=>'form-control'}
+                                <div n:if="$form['password']->hasErrors()" class="input-group-addon error">
+                                    {inputError password}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {input send}
+                        </div>
+                    {/form}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

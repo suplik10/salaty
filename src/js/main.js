@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip()
     $("#lightSlider-main").lightSlider({
         item: 1,
 
@@ -34,6 +35,7 @@ $(document).ready(function () {
         enableDrag: true,
         freeMove: true,
         swipeThreshold: 40,
+        pauseOnHover: true,
 
         responsive: [],
     });
@@ -57,6 +59,7 @@ $(document).ready(function () {
         enableDrag: true,
         freeMove: true,
         swipeThreshold: 40,
+        pauseOnHover: true,
 
         responsive: [
             {

@@ -16,7 +16,7 @@
         DAMESALAT.CZ
     </a>
 
-    <ul class="navbar-nav justify-content-end mr30">
+    <ul class="navbar-nav justify-content-end mr50">
         <li class="nav-item">
             <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>
         </li>
@@ -25,16 +25,22 @@
         </li>
     </ul>
     <ul class="navbar-nav justify-content-end">
-        <li class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">Přihlášení</a>
+        <li n:if="!$user->isLoggedIn()" class="nav-item">
+            <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Sign:in}">Přihlášení</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{plink Homepage:default}">Registrace</a>
+        <li n:if="!$user->isLoggedIn()" class="nav-item">
+            <a class="nav-link" href="{plink Sign:up}">Registrace</a>
+        </li>
+        <li n:if="$user->isLoggedIn()" class="nav-item">
+            <a class="nav-link" href="{plink Sign:profile}">Můj účet</a>
+        </li>
+        <li n:if="$user->isLoggedIn()" class="nav-item">
+            <a class="nav-link" href="{plink Sign:out}">Odhlášení</a>
         </li>
     </ul>
 </nav>
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 <div id="content">
+    <div n:foreach="$flashes as $flash" n:class="alert, 'alert-'.$flash->type">{$flash->message}</div>
     {include content}
 </div>
 <footer id="footer">
@@ -58,7 +64,7 @@
 </footer>
 
 {block scripts}
-    <script src="{$basePath}/js/main.js"></script>
+    <script src="{$basePath}/js/main.js?{time()}"></script>
 {/block}
 </body>
 </html>

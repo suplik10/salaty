@@ -1,3 +1,43 @@
 .product {
   margin-top: 10px;
 }
+
+.left-menu {
+  width: 200px;
+  float: left;
+  top: 75px;
+  left: 15px;
+  .nav-pills {
+    a {
+      background: #fff;
+      color: $grey;
+      border-left: 2px solid #fff;
+      border-radius: 0px;
+      font-weight: bold;
+      &.active {
+        color: $green;
+        border-left: 2px solid $green;
+        background: #fff;
+      }
+    }
+  }
+  @media(max-width: 768px) {
+    display: none;
+  }
+}
+.products {
+  margin-left: 200px;
+  float: left;
+  h2 {
+    border-bottom: 2px solid $green;
+    padding-bottom: 4px;
+    margin-top: 15px;
+  }
+  @media (min-width: 769px) {
+    width: calc(100vw - 280px - 200px - 45px);
+  }
+  @media (max-width: 768px) {
+    margin-left:0px;
+    width: calc(100vw - 280px - 45px);
+  }
+}

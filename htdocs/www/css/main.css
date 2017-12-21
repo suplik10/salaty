@@ -7280,6 +7280,73 @@ a.text-dark:focus, a.text-dark:hover {
 .product {
   margin-top: 10px; }
 
+.left-menu {
+  width: 200px;
+  float: left;
+  top: 75px;
+  left: 15px; }
+  .left-menu .nav-pills a {
+    background: #fff;
+    color: #757575;
+    border-left: 2px solid #fff;
+    border-radius: 0px;
+    font-weight: bold; }
+    .left-menu .nav-pills a.active {
+      color: #03bf00;
+      border-left: 2px solid #03bf00;
+      background: #fff; }
+  @media (max-width: 768px) {
+    .left-menu {
+      display: none; } }
+
+.products {
+  margin-left: 200px;
+  float: left; }
+  .products h2 {
+    border-bottom: 2px solid #03bf00;
+    padding-bottom: 4px;
+    margin-top: 15px; }
+  @media (min-width: 769px) {
+    .products {
+      width: calc(100vw - 280px - 200px - 45px); } }
+  @media (max-width: 768px) {
+    .products {
+      margin-left: 0px;
+      width: calc(100vw - 280px - 45px); } }
+
+.alert {
+  margin-bottom: 16px;
+  top: 8px;
+  margin-left: 15px;
+  margin-right: 15px; }
+
+label {
+  margin-bottom: 0px; }
+
+.cart {
+  margin-top: 15px;
+  padding-left: 15px;
+  display: inline-block;
+  position: fixed;
+  right: 15px;
+  width: 280px;
+  max-height: 500px;
+  overflow: auto; }
+  @media (max-width: 767px) {
+    .cart {
+      width: auto; } }
+
+.btn-primary {
+  color: #fff;
+  background: #03bf00;
+  border-color: #03bf00; }
+  .btn-primary:hover {
+    background: #05e502;
+    border-color: #05e502; }
+
+.order-product {
+  color: #fff !important; }
+
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -9605,11 +9672,23 @@ a.text-dark:focus, a.text-dark:hover {
   clip: auto; }
 
 /************  GENERAL CLASSES  *************/
+body {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+
+.pt15 {
+  padding-top: 15px; }
+
 .pt30 {
   padding-top: 30px; }
 
 .p30 {
   padding: 30px; }
+
+.pb30 {
+  padding-bottom: 30px; }
+
+.mt15 {
+  margin-top: 15px; }
 
 .mt30 {
   margin-top: 30px; }
@@ -9617,16 +9696,25 @@ a.text-dark:focus, a.text-dark:hover {
 .mb30 {
   margin-bottom: 30px; }
 
+.mb-30 {
+  margin-bottom: -30px; }
+
 .mr30 {
   margin-right: 30px; }
+
+.mr50 {
+  margin-right: 50px; }
 
 .bg-white {
   background: #fff; }
 
+h1 {
+  color: #4c4c4c; }
+
 .parallax {
   /* The image used */
   background-image: url("http://kfc.cz/assets/uploads/salatka_brazer-caesar-1920x440.jpg");
-  min-height: 350px;
+  min-height: 380px;
   /* Full height */
   height: 100%;
   /* Create the parallax scrolling effect */
@@ -9646,28 +9734,10 @@ a.text-dark:focus, a.text-dark:hover {
   bottom: 0;
   left: calc(50% - 96px); }
 
-.left-menu {
-  width: 260px;
-  float: left;
-  top: 75px;
-  left: 15px; }
-  .left-menu .nav-pills a {
-    background: #fff;
-    color: #757575;
-    border-left: 2px solid #fff;
-    border-radius: 0px; }
-    .left-menu .nav-pills a.active {
-      color: #03bf00;
-      border-left: 2px solid #03bf00;
-      background: #fff; }
-
-.products {
-  width: 60%;
-  margin-left: 260px;
-  float: left; }
-  .products h2 {
-    border-bottom: 2px solid #03bf00;
-    padding-bottom: 4px;
-    margin-top: 15px; }
+.navbar-nav {
+  flex-direction: row; }
+  .navbar-nav .nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem; }
 
 /*# sourceMappingURL=main.css.map */

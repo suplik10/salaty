@@ -1,0 +1,13 @@
+.cart {
+  margin-top: 15px;
+  padding-left: 15px;
+  display: inline-block;
+  position: fixed;
+  right:15px;
+  width: 280px;
+  max-height: 500px;
+  @media (max-width: 767px) {
+    width: auto;
+  }
+  overflow: auto;
+}
