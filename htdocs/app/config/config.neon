@@ -15,7 +15,7 @@ forms:
 
 session:
 	expiration: 14 days
-
+	savePath: "%tempDir%/session"
 
 services:
 	router: App\RouterFactory::createRouter
