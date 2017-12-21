@@ -21606,7 +21606,7 @@ var bootstrap = function(a, b) {
         return a(c || b);
     }, p;
 }), $(document).ready(function() {
-    $("#lightSlider-main").lightSlider({
+    $('[data-toggle="tooltip"]').tooltip(), $("#lightSlider-main").lightSlider({
         item: 1,
         autoWidth: !0,
         controls: !0,
@@ -22424,7 +22424,7 @@ var bootstrap = function(a, b) {
         type: "POST",
         url: b,
         success: function() {
-            $("#exampleModal").modal();
+            $("#productModal").modal();
         }
     });
 });

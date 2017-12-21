@@ -22,4 +22,7 @@ services:
 
 	- App\Model\UserManager
 	- App\Model\UserModel
+	- App\Model\ProductModel
+	- App\Model\CartModel
 	- App\Forms\UserFormFactory
+	- App\Forms\CartFormFactory

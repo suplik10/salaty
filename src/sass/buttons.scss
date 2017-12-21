@@ -1,0 +1,12 @@
+.btn-primary{
+  color:#fff;
+  background:$green;
+  border-color: $green;
+  &:hover{
+    background: $lighter-green;
+    border-color: $lighter-green;
+  }
+}
+.order-product{
+  color: #fff !important;
+}

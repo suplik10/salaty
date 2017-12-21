@@ -4,7 +4,7 @@ $(document).on("click", ".order-product", function(a) {
         type: "POST",
         url: b,
         success: function() {
-            $("#exampleModal").modal();
+            $("#productModal").modal();
         }
     });
 });

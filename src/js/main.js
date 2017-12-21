@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip()
     $("#lightSlider-main").lightSlider({
         item: 1,
 
