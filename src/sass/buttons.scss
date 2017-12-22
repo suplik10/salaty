@@ -2,7 +2,7 @@
   color:#fff;
   background:$green;
   border-color: $green;
-  &:hover{
+  &:hover, &:focus, &:active{
     background: $lighter-green;
     border-color: $lighter-green;
   }

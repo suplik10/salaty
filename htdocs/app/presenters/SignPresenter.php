@@ -56,6 +56,8 @@ class SignPresenter extends Presenter
         try {
             $this->userModel->isUserRegistered($values->email);
             $this->userModel->register($values);
+            $this->flashMessage('Registrace proběhla úspěšně.','success');
+            $this->redirect('Homepage:default');
         } catch (AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }

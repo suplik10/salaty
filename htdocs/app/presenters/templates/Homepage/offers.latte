@@ -6,7 +6,6 @@
                    href="#{$catName|webalize}">{$catName}</a>
             </nav>
         </nav>
-
         <div class="products">
             <div n:foreach="$categories as $categoryName => $products">
                 <h2 id="{$categoryName|webalize}">{$categoryName}</h2>
@@ -18,7 +17,7 @@
                             <h3 class="card-title">{$product['name']}</h3>
                             <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
                             <p class="card-text mt15">{$product['description']} </p>
-                            <a data-link="{link getProductData!, $product['id']}" class="btn order-product btn-primary">Objednat</a>
+                            <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}" class="btn order-product btn-primary">Objednat</a>
                         </div>
                     </div>
                 </div>
@@ -47,6 +46,7 @@
                 <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary">Vysypat košík</a>
                 <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary">Objednat</a>
             </div>
+            <p n:if="!$user->isLoggedIn()" class="pt15 pl15"><strong>Pro objednání se musíte přihlásit.</strong></p>
         </div>
     </div>
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
