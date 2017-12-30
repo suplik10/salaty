@@ -43,7 +43,8 @@ class CartModel
      * Delete from cart by cart ID
      * @param $cartId
      */
-    public function removeFromCart($cartId){
+    public function removeFromCart($cartId)
+    {
         $this->db->query("DELETE FROM cart WHERE id = ?", $cartId);
     }
 
@@ -51,8 +52,20 @@ class CartModel
      * Delete from cart by user
      * @param $userId
      */
-    public function removeAllFromCart($userId){
+    public function removeAllFromCart($userId)
+    {
         $this->db->query("DELETE FROM cart WHERE user_id = ?", $userId);
     }
 
+    /**
+     * Checks if the same order exists in cart
+     * @param $userId
+     * @param $date
+     * @param $productId
+     * @return bool|\Nette\Database\IRow|\Nette\Database\Row
+     */
+    public function checkCartForSameOrder($date, $userId, $productId)
+    {
+        return $this->db->query("SELECT * FROM cart WHERE DATE_FORMAT(date, '%Y-%m-%d') = ? AND user_id = ? AND product_id = ?", $date->format('Y-m-d'), $userId, $productId)->fetch();
+    }
 }

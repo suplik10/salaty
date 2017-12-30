@@ -26,7 +26,7 @@ class CartFormFactory
     public function createRegisterToCartForm()
     {
         $form = new Form();
-        $date = new DateTime();
+        $date = new DateTime('+1 day');
 
         $form->addText('date', 'Datum:')
             ->setDefaultValue($date->format('Y-m-d'))
@@ -38,7 +38,7 @@ class CartFormFactory
 
         $form->addHidden('productId', null);
 
-        $form->addSubmit('send', 'Přidat do košíku');
+        $form->addSubmit('send', 'Přidat do objednávky');
 
         return $form;
     }

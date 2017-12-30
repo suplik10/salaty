@@ -7318,7 +7318,8 @@ a.text-dark:focus, a.text-dark:hover {
   margin-bottom: 16px;
   top: 8px;
   margin-left: 15px;
-  margin-right: 15px; }
+  margin-right: 15px;
+  z-index: 1000; }
 
 label {
   margin-bottom: 0px; }
@@ -9675,6 +9676,9 @@ label {
 body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
 
+.mb0 {
+  margin-bottom: 0px; }
+
 .pl15 {
   padding-left: 15px; }
 
@@ -9711,6 +9715,15 @@ body {
 .bg-white {
   background: #fff; }
 
+.bg-grey {
+  background: #4c4c4c;
+  color: #fff; }
+
+a {
+  color: #03bf00; }
+  a:hover, a:active, a:focus {
+    color: #05e502; }
+
 h1 {
   color: #4c4c4c; }
 
@@ -9731,6 +9744,9 @@ h1 {
 
 .lSAction > a {
   background-image: none !important; }
+
+.lslide > a, .clone > a {
+  color: inherit; }
 
 .ls-caption {
   position: absolute;

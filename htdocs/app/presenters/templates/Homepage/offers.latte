@@ -25,7 +25,7 @@
         </div>
         <div class="cart">
             <div n:if="$user->isLoggedIn()">
-                <h2>Košík <span class="fa fa-shopping-cart"></span></h2>
+                <h2>Objednávka <span class="fa fa-shopping-cart"></span></h2>
                 {snippet cart}
                     <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
                         <thead class="thead-dark">
@@ -38,12 +38,12 @@
                             <th>{$cartProduct['name']}</th>
                             <td>x{$cartProduct['count']}</td>
                             <td>{$cartProduct['price']*$cartProduct['count']} Kč</td>
-                            <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}" data-toggle="tooltip" title="Odebrat z košíku" data-placement="top"><span class="fa fa-times red"></span></a></td>
+                            <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}" data-toggle="tooltip" title="Odebrat z objednávky" data-placement="top"><span class="fa fa-times red"></span></a></td>
                         </tr>
                         </tbody>
                     </table>
                 {/snippet}
-                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary">Vysypat košík</a>
+                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary">Odebrat vše</a>
                 <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary">Objednat</a>
             </div>
             <p n:if="!$user->isLoggedIn()" class="pt15 pl15"><strong>Pro objednání se musíte přihlásit.</strong></p>

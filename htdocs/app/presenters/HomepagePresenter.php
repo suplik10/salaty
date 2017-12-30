@@ -114,6 +114,8 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     {
         $values = $form->getValues();
 
+        $today = new Nette\Utils\DateTime();
+
         $data = [
             'product_id' => $values->productId,
             'user_id' => $this->user->getId(),
@@ -121,8 +123,21 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             'count' => $values->count
         ];
 
-        $this->cartModel->addProductToCart($data);
-        $this->redirect('this');
+        try {
+            $date = new Nette\Utils\DateTime($values->date);
+            if($today > $date){
+                throw new \Exception('Na tento datum nelze objednat.');
+            }
+            $cart = $this->cartModel->checkCartForSameOrder($date, $this->user->getId(), $values->productId);
+            if ($cart) {
+                $this->cartModel->removeFromCart($cart->id);
+                $data['count'] = $data['count'] + $cart->count;
+            }
+            $this->cartModel->addProductToCart($data);
+            $this->redirect('this');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
     }
 
     public function handleRemoveProductFromCart($cartId)
@@ -131,17 +146,43 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
             //TODO přidat kontrolu uživatele jestli maže svoje
             $this->cartModel->removeFromCart($cartId);
-           // $this->flashMessage('Odebrání z košíku proběhlo úspěšně.', 'success');
+            // $this->flashMessage('Odebrání z košíku proběhlo úspěšně.', 'success');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
     }
 
-    public function handleRemoveAllFromCart(){
+    public function handleRemoveAllFromCart()
+    {
         try {
             $this->cartModel->removeAllFromCart($this->user->getId());
             // $this->flashMessage('Odebrání z košíku proběhlo úspěšně.', 'success');
         } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
+
+
+    /**
+     * @return \Nette\Application\UI\Form
+     */
+    protected function createComponentSignInForm()
+    {
+        $form = $this->userForm->createSignIn();
+        $form->onSuccess[] = [$this, 'signInSucceeded'];
+        return $form;
+    }
+
+    public function signInSucceeded(Nette\Application\UI\Form $form)
+    {
+        $values = $form->getValues();
+
+        try {
+            $this->user->setExpiration('7 days', TRUE);
+            $this->user->login($values->email, $values->password);
+            $this->flashMessage('Přihlášení proběhlo úspěšně.', 'success');
+            $this->redirect('Homepage:default');
+        } catch (Nette\Security\AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
     }
