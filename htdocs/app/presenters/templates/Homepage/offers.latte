@@ -25,7 +25,7 @@
         </div>
         <div class="cart">
             <div n:if="$user->isLoggedIn()">
-                <h2>Objednávka <span class="fa fa-shopping-cart"></span></h2>
+                <h2>Objednávka</h2>
                 {snippet cart}
                     <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
                         <thead class="thead-dark">
