@@ -13,30 +13,23 @@
 <body data-spy="scroll" data-target="#categories" data-offset="75">
 <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="top-menu">
     <a class="navbar-brand mr-auto" href="{plink Homepage:default}">
-        <img src="/images/logo_192_new.png" class="img-responsive">
+        <img src="/images/logo_192_new.png" class="img-responsive logo">
     </a>
-
-    <ul class="navbar-nav justify-content-end mr50">
+    <ul class="navbar-nav justify-content-end">
         <li class="nav-item">
             <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>
         </li>
-        {*<li class="nav-item">
-            <a class="nav-link" href="{plink Homepage:default}">KONTAKTY</a>
-        </li>*}
-    </ul>
-    <ul class="navbar-nav justify-content-end">
         <li n:if="!$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:in') ? active" href="{plink Sign:in}">Přihlášení</a>
+            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:in') ? active" href="{plink Sign:in}">PŘIHLÁŠENÍ</a>
         </li>
         <li n:if="!$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:up') ? active" href="{plink Sign:up}">Registrace</a>
+            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:up') ? active" href="{plink Sign:up}">REGISTRACE</a>
         </li>
         <li n:if="$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:profile') ? active" href="{plink Sign:profile}">Můj
-                účet</a>
+            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:profile') ? active" href="{plink Sign:profile}">MŮJ ÚČET</a>
         </li>
         <li n:if="$user->isLoggedIn()" class="nav-item">
-            <a class="nav-link" href="{plink Sign:out}">Odhlášení</a>
+            <a class="nav-link" href="{plink Sign:out}">ODHLÁŠENÍ</a>
         </li>
     </ul>
 </nav>
@@ -54,8 +47,16 @@
             <div class="col-sm-4">
                 <h2>Kontakt:</h2>
                 <p>
-                    T: <a href="tel:+420111222333">+420 111 222 333</a><br/>
-                    E: <a href="mailto:kontakt@salatyobe.cz">kontakt@salatyobe.cz</a>
+                    T: <a href="tel:+420721346978">+420 721 346 978</a><br/>
+                    E: <a href="mailto:kontakt@salatyobe.cz">salatyob@seznam.cz</a>
+                </p>
+                <h2>Provozovatel:</h2>
+                <p>
+                    A.L.B spol. s.r.o.<br/>
+                    Obecnice 3<br/>
+                    262 21<br/>
+                    IČ 48953385<br/>
+                    DIČ CZ48953385
                 </p>
             </div>
             <div class="col-sm-4 text-center">
@@ -67,7 +68,15 @@
                 <p>Zpracování osobních údajů</p>
             </div>
             <div class="col-sm-4 text-right">
-
+                <p>Chcete od nás každý týden dostávat naši nabídku?</p>
+                {form signForNewsletter}
+                    <div class="form-group">
+                        {input email, class=>'form-control'}
+                    </div>
+                    <div class="form-group text-center">
+                        {input send}
+                    </div>
+                {/form}
             </div>
         </div>
     </div>

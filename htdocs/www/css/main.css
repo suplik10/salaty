@@ -7308,11 +7308,11 @@ a.text-dark:focus, a.text-dark:hover {
     margin-top: 15px; }
   @media (min-width: 769px) {
     .products {
-      width: calc(100vw - 280px - 200px - 45px); } }
+      width: calc(100vw - 330px - 200px - 45px); } }
   @media (max-width: 768px) {
     .products {
       margin-left: 0px;
-      width: calc(100vw - 280px - 45px); } }
+      width: calc(100vw - 330px - 45px); } }
 
 .alert {
   margin-bottom: 16px;
@@ -7330,9 +7330,10 @@ label {
   display: inline-block;
   position: fixed;
   right: 15px;
-  width: 280px;
-  max-height: 500px;
-  overflow: auto; }
+  width: 330px; }
+  .cart .cart-body {
+    max-height: 342px;
+    overflow: auto; }
   @media (max-width: 767px) {
     .cart {
       width: auto; } }
@@ -9679,6 +9680,9 @@ body {
 .mb0 {
   margin-bottom: 0px; }
 
+.mt5 {
+  margin-top: 5px; }
+
 .pl15 {
   padding-left: 15px; }
 
@@ -9714,6 +9718,9 @@ body {
 
 .bt-2 {
   border-top: 2px solid #fff; }
+
+.f-28 {
+  font-size: 28px; }
 
 .bg-white {
   background: #fff; }
@@ -9761,5 +9768,8 @@ h1 {
   .navbar-nav .nav-link {
     padding-right: .5rem;
     padding-left: .5rem; }
+
+.logo {
+  max-height: 40px; }
 
 /*# sourceMappingURL=main.css.map */

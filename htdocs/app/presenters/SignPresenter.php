@@ -167,4 +167,27 @@ class SignPresenter extends Presenter
         }
     }
 
+
+    protected function createComponentSignForNewsletter()
+    {
+        $form = $this->userForm->signForNewsletter();
+        $form->onSuccess[] = [$this, 'signForNewsletterSucceeded'];
+        return $form;
+    }
+
+    public function signForNewsletterSucceeded(Form $form)
+    {
+        $values = $form->getValues();
+        try {
+            $isSignedUp = $this->userModel->isEmailSignedForNewsletter($values->email);
+            if ($isSignedUp) {
+                throw new \Exception('Tento e-mail se již nachází v databázi pro odběr novinek');
+            }
+            $this->userModel->signForNewsletter($values->email);
+            $this->flashMessage('Přihlášení k odběru proběhlo úspěšně.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
+
 }

@@ -134,7 +134,6 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
                 $data['count'] = $data['count'] + $cart->count;
             }
             $this->cartModel->addProductToCart($data);
-            $this->redirect('this');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }

@@ -16,8 +16,10 @@
                         <div class="card-body">
                             <h3 class="card-title">{$product['name']}</h3>
                             <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
+                            <h5 class="card-subtitle mt5"><strong>{$product['weight']} g</strong></h5>
                             <p class="card-text mt15">{$product['description']} </p>
-                            <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}" class="btn order-product btn-primary">Objednat</a>
+                            <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}"
+                               class="btn order-product btn-primary">Objednat</a>
                         </div>
                     </div>
                 </div>
@@ -25,26 +27,34 @@
         </div>
         <div class="cart">
             <div n:if="$user->isLoggedIn()">
-                <h2>Objednávka</h2>
+                <h2 class="f-28">Objednávka</h2>
                 {snippet cart}
-                    <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th colspan="4">{date('d. m. Y',strtotime($date))}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr n:foreach="$cartProducts as $cartProduct">
-                            <th>{$cartProduct['name']}</th>
-                            <td>x{$cartProduct['count']}</td>
-                            <td>{$cartProduct['price']*$cartProduct['count']} Kč</td>
-                            <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}" data-toggle="tooltip" title="Odebrat z objednávky" data-placement="top"><span class="fa fa-times red"></span></a></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                {var $priceTotal = 0}
+                    <div class="cart-body">
+                        <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th colspan="4">{date('d. m. Y',strtotime($date))}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr n:foreach="$cartProducts as $cartProduct">
+                                {var $priceTotal = $priceTotal + ($cartProduct['price'] * $cartProduct['count'])}
+                                <th>{$cartProduct['name']}</th>
+                                <td>x{$cartProduct['count']}</td>
+                                <td>{$cartProduct['price']*$cartProduct['count']}&nbsp;Kč</td>
+                                <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}"
+                                       data-toggle="tooltip" title="Odebrat z objednávky" data-placement="top"><span
+                                                class="fa fa-times red"></span></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mb0 mt15"><strong>Cena celkem: {$priceTotal}&nbsp;Kč</strong></p>
                 {/snippet}
-                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary">Odebrat vše</a>
-                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary">Objednat</a>
+                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary mt5">Odebrat vše</a>
+                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary mt5">Objednat</a>
             </div>
             <p n:if="!$user->isLoggedIn()" class="pt15 pl15"><strong>Pro objednání se musíte přihlásit.</strong></p>
         </div>

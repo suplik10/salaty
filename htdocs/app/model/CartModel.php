@@ -35,7 +35,7 @@ class CartModel
      */
     public function getCart($userId)
     {
-        $cart = $this->db->query("SELECT c.id AS cartId, c.date, c.count, p.* FROM cart AS c INNER JOIN product AS p ON p.id = c.product_id WHERE c.user_id = ?", $userId);
+        $cart = $this->db->query("SELECT c.id AS cartId, c.date, c.count, p.* FROM cart AS c INNER JOIN product AS p ON p.id = c.product_id WHERE c.user_id = ? ORDER BY date ASC", $userId);
         return $cart;
     }
 

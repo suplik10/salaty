@@ -3,11 +3,14 @@
   padding-left: 15px;
   display: inline-block;
   position: fixed;
-  right:15px;
-  width: 280px;
-  max-height: 500px;
+  right: 15px;
+  width: 330px;
+  .cart-body {
+    max-height: 342px;
+    overflow: auto;
+  }
   @media (max-width: 767px) {
     width: auto;
   }
-  overflow: auto;
+
 }

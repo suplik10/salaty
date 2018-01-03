@@ -28,7 +28,7 @@ class ProductModel
      * @return \Nette\Database\ResultSet
      */
     public function getProducts(){
-        $products = $this->db->query('SELECT p.*, c.name AS category_name FROM product AS p INNER JOIN category AS c ON c.id = p.category_id');
+        $products = $this->db->query('SELECT p.*, c.name AS category_name FROM product AS p INNER JOIN category AS c ON c.id = p.category_id ORDER BY p.rank ASC');
         return $products;
     }
 
