@@ -37,6 +37,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div n:class="$form['factory']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['factory']->hasErrors() ? input-group">
+                                {input factory, class=>'form-control'}
+                                <div n:if="$form['factory']->hasErrors()" class="input-group-addon error">
+                                    {inputError factory}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['street']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['street']->hasErrors() ? input-group">
+                                {input street, class=>'form-control'}
+                                <div n:if="$form['street']->hasErrors()" class="input-group-addon error">
+                                    {inputError street}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['city']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['city']->hasErrors() ? input-group">
+                                {input city, class=>'form-control'}
+                                <div n:if="$form['city']->hasErrors()" class="input-group-addon error">
+                                    {inputError city}
+                                </div>
+                            </div>
+                        </div>
+                        <div n:class="$form['postalcode']->hasErrors() ? has-error, form-group">
+                            <div n:class="$form['postalcode']->hasErrors() ? input-group">
+                                {input postalcode, class=>'form-control'}
+                                <div n:if="$form['postalcode']->hasErrors()" class="input-group-addon error">
+                                    {inputError postalcode}
+                                </div>
+                            </div>
+                        </div>
                         <div n:class="$form['password']->hasErrors() ? has-error, form-group">
                             <div n:class="$form['password']->hasErrors() ? input-group">
                                 {input password, class=>'form-control'}

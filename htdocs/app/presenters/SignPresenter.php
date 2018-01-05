@@ -150,7 +150,14 @@ class SignPresenter extends Presenter
                 }
             }
 
+            $this->user->identity->firstname = $values->firstname;
+            $this->user->identity->lastname = $values->lastname;
+            $this->user->identity->phone = $values->phone;
             $this->user->identity->email = $values->email;
+            $this->user->identity->factory = $values->factory;
+            $this->user->identity->street = $values->street;
+            $this->user->identity->city = $values->city;
+            $this->user->identity->postalcode = $values->postalcode;
 
             $data = [
                 'id' => $this->user->getId(),
@@ -158,6 +165,10 @@ class SignPresenter extends Presenter
                 'lastname' => $values->lastname,
                 'email' => $values->email,
                 'phone' => $values->phone,
+                'factory' => $values->factory,
+                'street' => $values->street,
+                'city' => $values->city,
+                'postalcode' => $values->postalcode,
             ];
 
             $this->userModel->editUser($data);

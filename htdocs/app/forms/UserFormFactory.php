@@ -40,6 +40,17 @@ class UserFormFactory
         $form->addText('phone', 'Telefon:')
             ->setAttribute('placeholder', '* Telefon')
             ->setRequired();
+        $form->addText('factory', 'Firma:')
+            ->setAttribute('placeholder', 'Firma');
+        $form->addText('street', 'Ulice:')
+            ->setAttribute('placeholder', '* Ulice')
+            ->setRequired();
+        $form->addText('city', 'Město:')
+            ->setAttribute('placeholder', '* Město')
+            ->setRequired();
+        $form->addText('postalcode', 'PSČ:')
+            ->setAttribute('placeholder', '* PSČ')
+            ->setRequired();
         $form->addPassword('password', 'Heslo:')
             ->setAttribute('placeholder', '* Heslo')
             ->setRequired();
@@ -112,6 +123,21 @@ class UserFormFactory
         $form->addText('phone', 'Telefon:')
             ->setDefaultValue($user->identity->phone)
             ->setAttribute('placeholder', '* Telefon')
+            ->setRequired();
+        $form->addText('factory', 'Firma:')
+            ->setDefaultValue($user->identity->factory)
+            ->setAttribute('placeholder', 'Firma');
+        $form->addText('street', 'Ulice:')
+            ->setDefaultValue($user->identity->street)
+            ->setAttribute('placeholder', '* Ulice')
+            ->setRequired();
+        $form->addText('city', 'Město:')
+            ->setDefaultValue($user->identity->city)
+            ->setAttribute('placeholder', '* Město')
+            ->setRequired();
+        $form->addText('postalcode', 'PSČ:')
+            ->setDefaultValue($user->identity->postalcode)
+            ->setAttribute('placeholder', '* PSČ')
             ->setRequired();
         $form->addPassword('old_password', 'Staré heslo:')
             ->setAttribute('placeholder', 'Staré Heslo');

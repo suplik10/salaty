@@ -22427,4 +22427,16 @@ var bootstrap = function(a, b) {
             $("#productModal").modal();
         }
     });
+}), $.nette.ext("toast", {
+    load: function() {
+        $(".toast").length > 0 && setTimeout(function() {
+            $(".toast").removeClass("show");
+        }, 5e3);
+    }
+}), $(document).ready(function() {
+    $(".toast").length > 0 && setTimeout(function() {
+        $(".toast").removeClass("show");
+    }, 5e3);
+}), $(document).on("click", '*[data-dismiss="toast"]', function() {
+    $(this).parent(".toast").removeClass("show");
 });

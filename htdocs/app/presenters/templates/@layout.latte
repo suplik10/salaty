@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="{$basePath}/css/lightslider.min.css?{time()}">
 </head>
 
-<body data-spy="scroll" data-target="#categories" data-offset="75">
+<body data-spy="scroll" data-target="#categories" data-offset="0">
 <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="top-menu">
     <a class="navbar-brand mr-auto" href="{plink Homepage:default}">
-        <img src="/images/logo_192_new.png" class="img-responsive logo">
+        <img src="/images/logo_192_new.png" class="img-fluid logo">
     </a>
     <ul class="navbar-nav justify-content-end">
+        <li n:if="$user->isInRole('admin')" class="nav-item">
+            <a n:class="nav-link, $presenter->isLinkCurrent('Admin:') ? active" href="{plink Admin:default}">ADMINISTRACE</a>
+        </li>
         <li class="nav-item">
             <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>
         </li>
@@ -34,8 +37,16 @@
     </ul>
 </nav>
 <div id="content">
-    <div n:foreach="$flashes as $flash" n:class="alert, 'alert-'.$flash->type, alert-dismissible">{$flash->message}
+   {* <div n:foreach="$flashes as $flash" n:class="alert, 'alert-'.$flash->type, alert-dismissible">{$flash->message}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>*}
+
+    <div role="alert" n:foreach="$flashes as $flash" class="toast toast-{$flash->type} show">
+    <span n:class="fa, $flash->type == 'success' ? fa-check-circle, $flash->type == 'danger' ? fa-exclamation-circle, $flash->type == 'warning' ? fa-exclamation-triangle"
+          aria-hidden="true"></span> {$flash->message}
+        <button type="button" class="close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -48,27 +59,24 @@
                 <h2>Kontakt:</h2>
                 <p>
                     T: <a href="tel:+420721346978">+420 721 346 978</a><br/>
-                    E: <a href="mailto:kontakt@salatyobe.cz">salatyob@seznam.cz</a>
-                </p>
-                <h2>Provozovatel:</h2>
-                <p>
-                    A.L.B spol. s.r.o.<br/>
+                    E: <a href="mailto:kontakt@salatyobe.cz">salatyob@seznam.cz</a><br/>
+                    <span data-toggle="tooltip" data-html="true" title=" A.L.B spol. s.r.o.<br/>
                     Obecnice 3<br/>
                     262 21<br/>
                     IČ 48953385<br/>
-                    DIČ CZ48953385
+                    DIČ CZ48953385">Provozovatel <span class="fa fa-info-circle"></span></span>
                 </p>
             </div>
             <div class="col-sm-4 text-center">
                 <p data-html="true" title="Seznam potravinových alergenů. které se mohou nacházet v našich výrobcích, a které podléhají legislativnímu označování dle směrnice 1169/EU:
 <br/>1) Obiloviny, <br/>2) Korýši a výrobky z nich, <br/>3) Vejce a výrobky z nich, <br/>4) Ryby a výrobky z nich, <br/>7) Mléko a výrobky z něj, <br/>8) Skořápkové plody a výrobky z nich, <br/>9) Celer a výrobky z něj, <br/>10) Hořčice a výrobky z ní, <br/>11) Sezamová semena a výrobky z nich
 <br/><br/>Informace, které z těchto alergenů obsahuje konkrétní výrobek, lze vyžádat u prodejce." data-toggle="tooltip">
-                    <span class="fa fa-info-circle"></span> Informace o alergenech</p>
-                <p>Obchodní podmínky</p>
+                    Informace o alergenech <span class="fa fa-info-circle"></span></p>
+                <p><a href="{plink Homepage:vsp}">Obchodní podmínky</a></p>
                 <p>Zpracování osobních údajů</p>
             </div>
             <div class="col-sm-4 text-right">
-                <p>Chcete od nás každý týden dostávat naši nabídku?</p>
+                <p class="text-left f-23">Chcete od nás každý týden dostávat naši nabídku?</p>
                 {form signForNewsletter}
                     <div class="form-group">
                         {input email, class=>'form-control'}
@@ -86,10 +94,10 @@
                 <p> © salatyobe.cz 2018</p>
             </div>
             <div class="col-sm-4 text-sm-center">
-                <img src="/images/logo_192_new.png" class="img-responsive">
+                <a href="{plink Homepage:default}"><img src="/images/logo_192_new.png" class="img-fluid"></a>
             </div>
             <div class="col-sm-4 text-sm-right">
-                <p><a href="https://facebook.com" target="_blank"><span
+                <p><a href="https://cs-cz.facebook.com/Salaty-OB-533818860121333/" target="_blank"><span
                                 class="fa fa-facebook-official fa-2x"></span></a></p>
             </div>
         </div>

@@ -69,13 +69,18 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         try {
             $isSignedUp = $this->userModel->isEmailSignedForNewsletter($values->email);
             if ($isSignedUp) {
-                throw new Nette\Neon\Exception('Tento e-mail se již nachází v databázi pro odběr novinek');
+                throw new \Exception('Tento e-mail se již nachází v databázi pro odběr novinek');
             }
             $this->userModel->signForNewsletter($values->email);
             $this->flashMessage('Přihlášení k odběru proběhlo úspěšně.', 'success');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
+    }
+
+    public function renderDefault()
+    {
+        $this->template->products = $this->productModel->getProducts()->fetchAll();
     }
 
     public function renderOffers()
@@ -125,7 +130,10 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
         try {
             $date = new Nette\Utils\DateTime($values->date);
-            if($today > $date){
+            if ($today->format('Y-m-d') >= $date->format('Y-m-d')) {
+                throw new \Exception('Na tento datum nelze objednat.');
+            }
+            if ($today->format('H') >= 16 && $today->modify('+1 day') >= $date->format('Y-m-d')) {
                 throw new \Exception('Na tento datum nelze objednat.');
             }
             $cart = $this->cartModel->checkCartForSameOrder($date, $this->user->getId(), $values->productId);
@@ -135,6 +143,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             }
             $this->cartModel->addProductToCart($data);
         } catch (\Exception $e) {
+            //$this->template->cartError = $e->getMessage();
             $this->flashMessage($e->getMessage(), 'danger');
         }
     }

@@ -1,0 +1,97 @@
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  top: 85px;
+  right: 15px;
+  opacity: 1;
+  height: auto;
+  -webkit-box-shadow: 5px 5px 24px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 24px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 24px -6px rgba(0, 0, 0, 0.75);
+  &.show {
+    visibility: visible;
+    -webkit-animation: fadeout 0.5s 5.5s;
+    animation: fadeout 0.5s 5.5s;
+  }
+  &.toast-success {
+    background-color: $green;
+  }
+  &.toast-danger {
+    background-color: $lighter-red;
+  }
+  &.toast-info {
+    background-color: $blue;
+  }
+  &.toast-warning {
+    background-color: $orange;
+  }
+  .close {
+    color: #fff;
+    opacity: 1;
+    cursor: pointer;
+    margin-left: 5px;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 85px;
+    right: 15px;
+    opacity: 0;
+  }
+  to {
+    top: 85px;
+    right: 15px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 85px;
+    right: 15px;
+    opacity: 0;
+  }
+  to {
+    top: 85px;
+    right: 15px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 85px;
+    right: 15px;
+    opacity: 1;
+  }
+  to {
+    top: 85px;
+    right: 15px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 85px;
+    right: 15px;
+    opacity: 1;
+  }
+  to {
+    top: 85px;
+    right: 15px;
+    opacity: 0;
+  }
+}

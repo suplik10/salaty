@@ -31,22 +31,25 @@ class UserManager extends \Nette\Object implements \Nette\Security\IAuthenticato
     public function authenticate(array $credentials)
     {
         list($email, $password) = $credentials;
-        $user = $this->db->query("SELECT * from user WHERE email = ? ", $email)->fetch();
-
+        $user = $this->db->query("SELECT u.*,ur.name AS role_name from user AS u INNER JOIN user_role AS ur ON ur.id = u.user_role_id WHERE email = ? ", $email)->fetch();
         if (!$user) {
             throw new AuthenticationException('Uživatelské jméno nebo heslo nesouhlasí.');
         } elseif (!Passwords::verify($password, $user->password)) {
             throw new AuthenticationException('Uživatelské jméno nebo heslo nesouhlasí.');
-        } elseif($user->active != 1){
+        } elseif ($user->active != 1) {
             throw new AuthenticationException('Váš účet čeká na aktivaci. ');
         }
         $arr = [
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'email' => $user->email,
-            'phone' => $user->phone
+            'phone' => $user->phone,
+            'factory' => $user->factory,
+            'street' => $user->street,
+            'city' => $user->city,
+            'postalcode' => $user->postalcode,
         ];
 
-        return new Identity($user->id, [], $arr);
+        return new Identity($user->id, [0 => $user->role_name], $arr);
     }
 }

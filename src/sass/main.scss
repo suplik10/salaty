@@ -4,6 +4,7 @@
 @import "footer";
 @import "products";
 @import "alert";
+@import "toast";
 @import "form";
 @import "cart";
 @import "buttons";
@@ -17,7 +18,8 @@ body {
 .mb0 {
   margin-bottom: 0px;
 }
-.mt5{
+
+.mt5 {
   margin-top: 5px;
 }
 
@@ -69,8 +71,12 @@ body {
   border-top: 2px solid #fff;
 }
 
-.f-28{
-  font-size:28px;
+.f-23 {
+  font-size: 23px;
+}
+
+.f-28 {
+  font-size: 28px;
 }
 
 .bg-white {
@@ -87,10 +93,6 @@ a {
   &:hover, &:active, &:focus {
     color: $lighter-green;
   }
-}
-
-h1 {
-  color: $dark-grey;
 }
 
 .parallax {
@@ -110,7 +112,7 @@ h1 {
 }
 
 #content {
-  margin-top: 58px;
+  margin-top: 66px;
 }
 
 //lightslider controls
@@ -136,7 +138,6 @@ h1 {
   }
 }
 
-
-.logo{
+.logo {
   max-height: 40px;
 }

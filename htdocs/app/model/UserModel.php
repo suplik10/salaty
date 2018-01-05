@@ -87,11 +87,15 @@ class UserModel
      */
     public function editUser($data)
     {
-        $this->db->query('UPDATE user SET firstname = ?, lastname = ?, email = ?, phone = ? WHERE id = ?',
+        $this->db->query('UPDATE user SET firstname = ?, lastname = ?, email = ?, phone = ?, factory = ?, street = ?, city = ?, postalcode = ? WHERE id = ?',
             $data['firstname'],
             $data['lastname'],
             $data['email'],
             $data['phone'],
+            $data['factory'],
+            $data['street'],
+            $data['city'],
+            $data['postalcode'],
             $data['id']
         );
     }
