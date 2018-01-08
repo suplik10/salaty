@@ -54,12 +54,13 @@
                     <p class="mb0 mt15"><strong>Cena celkem: {$priceTotal}&nbsp;Kč</strong></p>
                 {/snippet}
                 <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary mt5">Odebrat vše</a>
-                <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-primary mt5">Objednat</a>
+                <a n:if="!empty($cart)" href="" data-toggle="modal" data-target="#orderModal" class="btn btn-primary mt5">Objednat</a>
             </div>
             <p n:if="!$user->isLoggedIn()" class="pt15 pl15"><strong>Pro objednání se musíte přihlásit.</strong></p>
         </div>
     </div>
 
+    {*MODAL PRO PŘIDÁNÍ DO KOŠÍKU*}
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -86,12 +87,61 @@
                             </div>
                         </div>
                         {input productId, value=> $productId}
+                        {input categoryId, value=> $categoryId}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
                         {input send, class=>'btn btn-primary'}
                     </div>
                 {/form}
+                {/snippet}
+            </div>
+        </div>
+    </div>
+
+    {*MODAL PRO DOKONČENÍ OBJEDNÁVKY*}
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {snippet order}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderModalLabel">Potvrzení objednávky</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        {var $priceTotal = 0}
+                        <div>
+                            <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th colspan="4">{date('d. m. Y',strtotime($date))}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr n:foreach="$cartProducts as $cartProduct">
+                                    {var $priceTotal = $priceTotal + ($cartProduct['price'] * $cartProduct['count'])}
+                                    <th>{$cartProduct['name']}</th>
+                                    <td>x{$cartProduct['count']}</td>
+                                    <td>{$cartProduct['price']*$cartProduct['count']}&nbsp;Kč</td>
+                                    {*<td><a href="{link removeProductFromCart!, $cartProduct['cartId']}"
+                                           data-toggle="tooltip" title="Odebrat z objednávky" data-placement="top"><span
+                                                    class="fa fa-times red"></span></a></td>*}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mb0 mt15"><strong>Cena celkem: {$priceTotal}&nbsp;Kč</strong></p>
+                        <p class="mt15">Odesláním objednávky souhlasíte s našimi <a href="{plink Homepage:vsp}"> všeobecnými podmínkami</a></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                        <a class="btn btn-primary" href="{link createOrder!}">Potvrdit objednávku</a>
+                    </div>
                 {/snippet}
             </div>
         </div>

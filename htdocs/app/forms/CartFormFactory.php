@@ -37,6 +37,7 @@ class CartFormFactory
             ->setRequired();
 
         $form->addHidden('productId', null);
+        $form->addHidden('categoryId', null);
 
         $form->addSubmit('send', 'Přidat do objednávky');
 

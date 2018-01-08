@@ -1,6 +1,7 @@
 {block content}
     <div class="container">
         <h1 class="text-center pt15">Editace účtu</h1>
+        <p class="text-center">Stav účtu: <strong><span n:class="$wallet < 0 ? text-danger : text-success">{$wallet} Kč</span></strong></p>
         <div class="row justify-content-center">
             <div class="col-sm-6">
                 {form editProfile}

@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Forms\CartFormFactory;
 use App\Forms\UserFormFactory;
 use App\Model\CartModel;
+use App\Model\OrderModel;
 use App\Model\ProductModel;
 use App\Model\UserManager;
 use App\Model\UserModel;
@@ -13,12 +14,19 @@ use Nette;
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
 {
+    const CATEGORY_RAW_ZAKUSKY = 2;
+
     /**
      * Product ID
-     * @persistent
      * @var
      */
     private $productId;
+
+    /**
+     * Product category ID
+     * @var
+     */
+    private $categoryId;
 
     /**
      * Product Name
@@ -56,6 +64,12 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     public $cartModel;
 
+    /**
+     * @var OrderModel
+     * @inject
+     */
+    public $orderModel;
+
     protected function createComponentSignForNewsletter()
     {
         $form = $this->userForm->signForNewsletter();
@@ -81,12 +95,14 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     public function renderDefault()
     {
         $this->template->products = $this->productModel->getProducts()->fetchAll();
+        $this->template->wallet = $this->orderModel->getUserWallet($this->user->getId());
     }
 
     public function renderOffers()
     {
         $this->template->productId = $this->productId;
         $this->template->productName = $this->productName;
+        $this->template->categoryId = $this->categoryId;
         $this->template->categories = $this->getCategoriesWithProducts();
         $this->template->cart = $this->cartModel->getCart($this->user->getId())->fetchAssoc('date[]');
     }
@@ -97,6 +113,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->productId = $productId;
         $product = $this->productModel->getProduct($productId);
         $this->productName = $product->name;
+        $this->categoryId = $product->category_id;
         $this->redrawControl();
     }
 
@@ -120,6 +137,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         $values = $form->getValues();
 
         $today = new Nette\Utils\DateTime();
+        $date2 = new Nette\Utils\DateTime('+2 days');
 
         $data = [
             'product_id' => $values->productId,
@@ -136,6 +154,19 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             if ($today->format('H') >= 16 && $today->modify('+1 day') >= $date->format('Y-m-d')) {
                 throw new \Exception('Na tento datum nelze objednat.');
             }
+
+            if ($date->format('N') > 5) { //chce objednávat na víkend
+                throw new \Exception('Na tento datum nelze objednat.');
+            }
+
+            if ($today->format('N') > 5) { //je víkend
+                throw new \Exception('O víkendu nelze objednávat.');
+            }
+
+            if ($values->categoryId === self::CATEGORY_RAW_ZAKUSKY  && $today->format('W') >= $date->format('W')) {
+                throw new \Exception('Na tento datum nelze RAW zákusky objednat.');
+            }
+
             $cart = $this->cartModel->checkCartForSameOrder($date, $this->user->getId(), $values->productId);
             if ($cart) {
                 $this->cartModel->removeFromCart($cart->id);
@@ -143,7 +174,6 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             }
             $this->cartModel->addProductToCart($data);
         } catch (\Exception $e) {
-            //$this->template->cartError = $e->getMessage();
             $this->flashMessage($e->getMessage(), 'danger');
         }
     }
@@ -192,6 +222,28 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             $this->redirect('Homepage:default');
         } catch (Nette\Security\AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
+
+
+    public function handleCreateOrder()
+    {
+        try {
+            //TODO přidat kontrolu datumu objednávky, jako je při přidávání do košíku
+            $cart = $this->cartModel->getCart($this->user->getId())->fetchAll();
+            $totalPrice = 0;
+            foreach ($cart as $product) {
+                $totalPrice = $totalPrice + ($product->price * $product->count);
+            }
+            $date = new Nette\Utils\DateTime();
+
+            $order = $this->orderModel->createOrder($this->user->getId(), $totalPrice, $date);
+            $this->orderModel->addProductsToOrder($cart, $order->id);
+            $this->cartModel->removeAllFromCart($this->user->getId());
+            $this->flashMessage('Objednávka proběhla úspěšně. Na Vaši e-mailovou adresu byl zaslán email se souhrnem objednávky.', 'success');
+
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'error');
         }
     }
 }

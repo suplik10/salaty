@@ -10,6 +10,7 @@ namespace App\Presenters;
 
 
 use App\Forms\UserFormFactory;
+use App\Model\OrderModel;
 use App\Model\UserManager;
 use App\Model\UserModel;
 use Nette\Application\UI\Form;
@@ -39,6 +40,12 @@ class SignPresenter extends Presenter
      */
     public $userManager;
 
+    /**
+     * @var OrderModel
+     * @inject
+     */
+    public $orderModel;
+
 
     /**
      * @return \Nette\Application\UI\Form
@@ -56,7 +63,7 @@ class SignPresenter extends Presenter
         try {
             $this->userModel->isUserRegistered($values->email);
             $this->userModel->register($values);
-            $this->flashMessage('Registrace proběhla úspěšně.','success');
+            $this->flashMessage('Registrace proběhla úspěšně.', 'success');
             $this->redirect('Homepage:default');
         } catch (AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
@@ -107,6 +114,11 @@ class SignPresenter extends Presenter
             $this->flashMessage('Pro tuto akci je potřeba být přihlášený.', 'danger');
             $this->redirect('Homepage:default');
         }
+    }
+
+    public function renderProfile()
+    {
+        $this->template->wallet = $this->orderModel->getUserWallet($this->user->getId());
     }
 
     protected function createComponentEditProfile()

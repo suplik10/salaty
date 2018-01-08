@@ -114,6 +114,7 @@
                         </div>
                         <div n:if="$user->isLoggedIn()" class="text-center">
                             <p>Jste přihlášen jako <a href="{plink Sign:profile}">{$user->identity->firstname} {$user->identity->lastname}</a></p>
+                            <p>Stav účtu: <strong><span n:class="$wallet < 0 ? text-danger : text-success">{$wallet} Kč</span></strong></p>
                             <p>Odhlásit se můžete kliknutím <a n:if="$user->isLoggedIn()" href="{plink Sign:out}">ZDE</a>.</p>
                         </div>
                     </div>

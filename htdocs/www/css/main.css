@@ -7426,7 +7426,8 @@ label {
   border-color: #03bf00; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: #05e502;
-    border-color: #05e502; }
+    border-color: #05e502;
+    color: #fff; }
 
 .order-product {
   color: #fff !important; }

@@ -24,17 +24,8 @@ class AdminPresenter extends Presenter
 
 
     /**
-     * @var UserModel<script type="text/javascript">
-    / <![CDATA[ /
-    var seznam_retargeting_id = 16364;
-    / ]]> /
-    </script>
-    <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script><script type="text/javascript">
-    / <![CDATA[ /
-    var seznam_retargeting_id = 16364;
-    / ]]> /
-    </script>
-    <script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
+     * @var UserModel
+     *
      * @inject
      */
     public $userModel;
