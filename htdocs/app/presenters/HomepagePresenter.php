@@ -163,7 +163,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
                 throw new \Exception('O víkendu nelze objednávat.');
             }
 
-            if ($values->categoryId === self::CATEGORY_RAW_ZAKUSKY  && $today->format('W') >= $date->format('W')) {
+            if ($values->categoryId === self::CATEGORY_RAW_ZAKUSKY  && $today->format('W') >= $date->format('W')) { //raw zákusky objednávání pouze na další týden
                 throw new \Exception('Na tento datum nelze RAW zákusky objednat.');
             }
 

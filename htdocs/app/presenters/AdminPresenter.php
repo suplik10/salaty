@@ -9,13 +9,21 @@
 namespace App\Presenters;
 
 
+use App\Forms\AdminFormFactory;
 use App\Forms\UserFormFactory;
+use App\Model\IngredientModel;
 use App\Model\UserModel;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 
 class AdminPresenter extends Presenter
 {
+    /**
+     * @var AdminFormFactory
+     * @inject
+     */
+    public $adminForm;
+
     /**
      * @var UserFormFactory
      * @inject
@@ -29,6 +37,12 @@ class AdminPresenter extends Presenter
      * @inject
      */
     public $userModel;
+
+    /**
+     * @var IngredientModel
+     * @inject
+     */
+    public $ingredientModel;
 
     protected function createComponentSignForNewsletter()
     {
@@ -50,6 +64,43 @@ class AdminPresenter extends Presenter
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
+    }
+
+    protected function createComponentAddNewIngredientsForm()
+    {
+        $form = $this->adminForm->createNewIngredientsForm();
+        $form->onSuccess[] = [$this, 'addNewIngredientSucceeded'];
+        return $form;
+    }
+
+    public function addNewIngredientSucceeded(Form $form)
+    {
+        $values = $form->getValues();
+        try {
+            $this->ingredientModel->addIngredient($values);
+            $this->flashMessage('Ingredience byla úspěšně vytvořena.', 'success');
+            $this->redrawControl();
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
+
+
+    public function handleDeleteIngredient($ingredientId)
+    {
+        try {
+            $this->ingredientModel->removeIngredientFromAllProducts($ingredientId);
+            $this->ingredientModel->removeIngredient($ingredientId);
+            $this->flashMessage('Ingredience byla úspěšně smazána.', 'success');
+            $this->redrawControl();
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
+
+    public function renderDefault()
+    {
+        $this->template->ingredients = $this->ingredientModel->getAllIngredients()->fetchAll();
     }
 
 }
