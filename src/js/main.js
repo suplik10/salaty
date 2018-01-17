@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     $("#lightSlider-main").lightSlider({
         item: 1,
 
@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 
         controls: true,
-        pager:false,
+        pager: false,
         prevHtml: '',
         nextHtml: '',
 
@@ -76,5 +76,7 @@ $(document).ready(function () {
             }
         ]
     });
+
+    $('.select2').select2();
 });
 

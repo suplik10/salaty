@@ -17,7 +17,7 @@
     </a>
     <ul class="navbar-nav justify-content-end">
         <li n:if="$user->isInRole('admin')" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Admin:') ? active" href="{plink Admin:default}">ADMINISTRACE</a>
+            <a n:class="nav-link, $presenter->isLinkCurrent('Admin:*') ? active" href="{plink Admin:default}">ADMINISTRACE</a>
         </li>
         <li class="nav-item">
             <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>

@@ -1,0 +1,125 @@
+{block content}
+    <div class="container">
+
+        <h1 class="text-center pt15">Editace produktu</h1>
+        <a href="{plink Admin:product}" class="btn btn-primary">Zpět</a>
+        <div class="row justify-content-center mt15">
+            <div class="col-sm-6">
+                {form editProductForm}
+                    <div n:class="$form['name']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label name}
+                            </div>
+                            {input name, class=>'form-control'}
+                            <div n:if="$form['name']->hasErrors()" class="input-group-addon error">
+                                {inputError name}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['description']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label description}
+                            </div>
+                            {input description, class=>'form-control'}
+                            <div n:if="$form['description']->hasErrors()" class="input-group-addon error">
+                                {inputError description}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['price']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label price}
+                            </div>
+                            {input price, class=>'form-control'}
+                            <div n:if="$form['price']->hasErrors()" class="input-group-addon error">
+                                {inputError price}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['weight']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label weight}
+                            </div>
+                            {input weight, class=>'form-control'}
+                            <div n:if="$form['weight']->hasErrors()" class="input-group-addon error">
+                                {inputError weight}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['rank']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label rank}
+                            </div>
+                            {input rank, class=>'form-control'}
+                            <div n:if="$form['rank']->hasErrors()" class="input-group-addon error">
+                                {inputError rank}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['category_id']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label category_id}
+                            </div>
+                            {input category_id, class=>'form-control'}
+                            <div n:if="$form['category_id']->hasErrors()" class="input-group-addon error">
+                                {inputError category_id}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['ingredients']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label ingredients}
+                            </div>
+                            {input ingredients, class=>'form-control select2'}
+                            <div n:if="$form['ingredients']->hasErrors()" class="input-group-addon error">
+                                {inputError ingredients}
+                            </div>
+                        </div>
+                    </div>
+                    <div n:class="$form['img']->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label img}
+                            </div>
+                            {input img, class=>'form-control'}
+                            <div n:if="$form['img']->hasErrors()" class="input-group-addon error">
+                                {inputError img}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {input send}
+                    </div>
+                {/form}
+            </div>
+            <div class="col-sm-6">
+                <p>Editace množství ingrediencí v produktu (v gramech):</p>
+                {form editProductIngredientsForm}
+                {foreach $productIngredients as $ingredient}
+                    <div n:class="$form[$ingredient->ingredient_id]->hasErrors() ? has-error, form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                {label $ingredient->ingredient_id}
+                            </div>
+                            {input $ingredient->ingredient_id, class=>'form-control'}
+                            <div n:if="$form[$ingredient->ingredient_id]->hasErrors()" class="input-group-addon error">
+                                {inputError $ingredient->ingredient_id}
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+                    <div class="form-group">
+                        {input send}
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+{/block}

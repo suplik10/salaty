@@ -8,11 +8,22 @@
 @import "form";
 @import "cart";
 @import "buttons";
+@import "admin";
+@import "select2";
+@import "select2-bootstrap4";
 @import "fontawesome/font-awesome";
 
 /************  GENERAL CLASSES  *************/
 body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.mh100 {
+  max-height: 100px;
+}
+
+.red {
+  color: $lighter-red;
 }
 
 .mb0 {
@@ -94,6 +105,9 @@ a {
     color: $lighter-green;
   }
 }
+a:not([href]):not([tabindex]){
+  color: #fff;
+}
 
 .parallax {
   /* The image used */
@@ -140,4 +154,8 @@ a {
 
 .logo {
   max-height: 40px;
+}
+
+.modal-dialog{
+  z-index: 1051;
 }

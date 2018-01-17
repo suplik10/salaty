@@ -104,6 +104,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->productName = $this->productName;
         $this->template->categoryId = $this->categoryId;
         $this->template->categories = $this->getCategoriesWithProducts();
+        $this->template->productIngredients = $this->productModel->getProductsWithIngredients()->fetchAssoc('id[]');
         $this->template->cart = $this->cartModel->getCart($this->user->getId())->fetchAssoc('date[]');
     }
 
@@ -136,9 +137,6 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     {
         $values = $form->getValues();
 
-        $today = new Nette\Utils\DateTime();
-        $date2 = new Nette\Utils\DateTime('+2 days');
-
         $data = [
             'product_id' => $values->productId,
             'user_id' => $this->user->getId(),
@@ -148,24 +146,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
         try {
             $date = new Nette\Utils\DateTime($values->date);
-            if ($today->format('Y-m-d') >= $date->format('Y-m-d')) {
-                throw new \Exception('Na tento datum nelze objednat.');
-            }
-            if ($today->format('H') >= 16 && $today->modify('+1 day') >= $date->format('Y-m-d')) {
-                throw new \Exception('Na tento datum nelze objednat.');
-            }
-
-            if ($date->format('N') > 5) { //chce objednávat na víkend
-                throw new \Exception('Na tento datum nelze objednat.');
-            }
-
-            if ($today->format('N') > 5) { //je víkend
-                throw new \Exception('O víkendu nelze objednávat.');
-            }
-
-            if ($values->categoryId === self::CATEGORY_RAW_ZAKUSKY  && $today->format('W') >= $date->format('W')) { //raw zákusky objednávání pouze na další týden
-                throw new \Exception('Na tento datum nelze RAW zákusky objednat.');
-            }
+            $this->validateOrder($date, $values->categoryId);
 
             $cart = $this->cartModel->checkCartForSameOrder($date, $this->user->getId(), $values->productId);
             if ($cart) {
@@ -228,12 +209,13 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function handleCreateOrder()
     {
+
         try {
-            //TODO přidat kontrolu datumu objednávky, jako je při přidávání do košíku
             $cart = $this->cartModel->getCart($this->user->getId())->fetchAll();
             $totalPrice = 0;
             foreach ($cart as $product) {
                 $totalPrice = $totalPrice + ($product->price * $product->count);
+                $this->validateOrder($product->date, $product->category_id);
             }
             $date = new Nette\Utils\DateTime();
 
@@ -244,6 +226,40 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'error');
+        }
+    }
+
+    public function validateOrder(Nette\Utils\DateTime $date, $categoryId)
+    {
+        $today = new Nette\Utils\DateTime('2018-01-19 17:00');
+        $tomorrow = new Nette\Utils\DateTime('+1 day');
+
+        if ($today->format('Y-m-d') >= $date->format('Y-m-d')) {
+            throw new \Exception('Na tento datum nelze objednat.');
+        }
+
+        if ($today->format('N') > 5) { //je víkend
+            throw new \Exception('O víkendu nelze objednávat.');
+        }
+
+        if ($today->format('N') == 5 && $today->format('H') >= 16 && $date->format('W') == ($today->format('W') + 1) && $date->format('N') == 1) { //je pátek > 16:00 a objednává na pondělí
+            throw new \Exception('Na tento datum nelze objednat.');
+        }
+
+        if ($today->format('H') >= 16 && $tomorrow->format('Y-m-d') >= $date->format('Y-m-d')) { //je >16:00 a objednává na další den
+            throw new \Exception('Na tento datum nelze objednat.');
+        }
+
+        if ($date->format('N') > 5) { //chce objednávat na víkend
+            throw new \Exception('Na víkend nelze objednat.');
+        }
+
+        if ($categoryId == self::CATEGORY_RAW_ZAKUSKY &&
+            ((int)$today->format('W') >= (int)$date->format('W')
+                || $date->format('N') != 3
+                || ((int)$today->format('N') == 5 && $today->format('H') >= 16 && $date->format('W') == ($today->format('W') + 1))
+            )) { //raw zákusky objednávání pouze na další týden
+            throw new \Exception('Na tento datum nelze RAW zákusky objednat.');
         }
     }
 }

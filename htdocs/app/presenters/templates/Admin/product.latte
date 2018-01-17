@@ -1,0 +1,159 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+                    {* PRODUKTY *}
+                    <div id="products">
+                        <h2 class="float-left">Správa produktů</h2>
+                        <span class="float-right" data-toggle="modal" data-target="#newProductModal"><a
+                                    class="btn btn-primary" data-toggle="tooltip"
+                                    title="Vytvoření nového produktu"><span class="fa fa-plus"></span></a></span>
+                        {snippet products}
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Název</th>
+                                    <th></th>
+                                    <th>Cena</th>
+                                    <th>Váha</th>
+                                    <th>Pořadí</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$products as $product">
+                                    <td class="align-middle">{$product->name}</td>
+                                    <td class="align-middle text-left"><img class="img-fluid mh100"
+                                                                            src="{$product->img}"/></td>
+                                    <td class="align-middle">{$product->price} Kč</td>
+                                    <td class="align-middle">{$product->weight} G</td>
+                                    <td class="align-middle">{$product->rank}</td>
+                                    <td n:class="$product->active == 1 ? text-success : text-danger, align-middle">{$product->active == 1 ? 'aktivní' : 'neaktivní'}</td>
+                                    <td class="align-middle"><a n:if="$product->active == 0"
+                                                                href="{link changeProductState!, $product->id, 1}"
+                                                                data-toggle="tooltip" title="Aktivovat produkt"
+                                                                data-placement="top"><span
+                                                    class="fa fa-check"></span></a>
+                                        <a n:if="$product->active == 1"
+                                           href="{link changeProductState!, $product->id, 0}"
+                                           data-toggle="tooltip" title="Deaktivovat produkt" data-placement="top"><span
+                                                    class="fa fa-times red"></span></a></td>
+                                    <td class="align-middle"><a
+                                                href="{plink Admin:productDetail, product_id => $product->id}"
+                                                data-toggle="tooltip" title="Editovat produkt"
+                                                data-placement="top"><span
+                                                    class="fa fa-pencil"></span></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {*MODAL PRO PŘIDÁNÍ NOVÉHO PRODUKTU*}
+        <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="newProductModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {snippet new-product}
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="newProductModalLabel">Vytvoření nového produktu
+                            <h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                    </div>
+                    <div class="modal-body">
+                        {form newProductForm}
+                            <div n:class="$form['name']->hasErrors() ? has-error, form-group">
+                                <div n:class="$form['name']->hasErrors() ? input-group">
+                                    {input name, class=>'form-control'}
+                                    <div n:if="$form['name']->hasErrors()" class="input-group-addon error">
+                                        {inputError name}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['description']->hasErrors() ? has-error, form-group">
+                                <div n:class="$form['description']->hasErrors() ? input-group">
+                                    {input description, class=>'form-control'}
+                                    <div n:if="$form['description']->hasErrors()" class="input-group-addon error">
+                                        {inputError description}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['price']->hasErrors() ? has-error, form-group">
+                                <div n:class="$form['price']->hasErrors() ? input-group">
+                                    {input price, class=>'form-control'}
+                                    <div n:if="$form['price']->hasErrors()" class="input-group-addon error">
+                                        {inputError price}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['weight']->hasErrors() ? has-error, form-group">
+                                <div n:class="$form['weight']->hasErrors() ? input-group">
+                                    {input weight, class=>'form-control'}
+                                    <div n:if="$form['weight']->hasErrors()" class="input-group-addon error">
+                                        {inputError weight}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['rank']->hasErrors() ? has-error, form-group">
+                                <div n:class="$form['rank']->hasErrors() ? input-group">
+                                    {input rank, class=>'form-control'}
+                                    <div n:if="$form['rank']->hasErrors()" class="input-group-addon error">
+                                        {inputError rank}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['category_id']->hasErrors() ? has-error, form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        {label category_id}
+                                    </div>
+                                    {input category_id, class=>'form-control'}
+                                    <div n:if="$form['category_id']->hasErrors()" class="input-group-addon error">
+                                        {inputError category_id}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['ingredients']->hasErrors() ? has-error, form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        {label ingredients}
+                                    </div>
+                                    {input ingredients, class=>'form-control'}
+                                    <div n:if="$form['ingredients']->hasErrors()" class="input-group-addon error">
+                                        {inputError ingredients}
+                                    </div>
+                                </div>
+                            </div>
+                            <div n:class="$form['img']->hasErrors() ? has-error, form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        {label img}
+                                    </div>
+                                    {input img, class=>'form-control'}
+                                    <div n:if="$form['img']->hasErrors()" class="input-group-addon error">
+                                        {inputError img}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {input send}
+                            </div>
+                        {/form}
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

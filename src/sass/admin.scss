@@ -1,0 +1,9 @@
+#administrace {
+  .nav-pills {
+    .nav-link {
+      &.active {
+        background-color: $green;
+      }
+    }
+  }
+}

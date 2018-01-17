@@ -1,52 +1,13 @@
 {block content}
-    <div class="container-fluid pt15">
+    <div class="container-fluid pt15" id="administrace">
         <div class="row">
             <div class="col-sm-3 col-md-2">
-                <div class="nav flex-column nav-pills" id="admin-menu" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="ingredients-tab" data-toggle="pill" href="#ingredients" role="tab">Ingredience</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab">Produkty</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
-                       role="tab">Messages</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
-                       role="tab">Settings</a>
-                </div>
+                {include "left-menu.latte"}
             </div>
             <div class="col-sm-9 col-md-10">
                 <div class="tab-content" id="admin-menuContent">
                     <h1>Administrace</h1>
-                    <div class="tab-pane fade show active" id="ingredients" role="tabpanel">
-                        <h2>Vytvoření nové ingredience</h2>
-                        {form addNewIngredientsForm}
-                            <div n:class="$form['name']->hasErrors() ? has-error, form-group, row">
-                                <div class="input-group  col-sm-6">
-                                    {input name, class=>'form-control'}
-                                    <div class="input-group-addon">
-                                        {input send}
-                                    </div>
-                                </div>
-                            </div>
 
-                        {/form}
-                        <h2>Seznam existujících ingrediencí</h2>
-                        {snippet ingredients}
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Název ingredience</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr n:foreach="$ingredients as $ingredient">
-                                <td>{$ingredient->name}</td>
-                                <td><a href="{link deleteIngredient!, $ingredient->id}"
-                                       data-toggle="tooltip" title="Smazat ingredienci" data-placement="top"><span
-                                                class="fa fa-times red"></span></a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        {/snippet}
-                    </div>
                 </div>
             </div>
         </div>

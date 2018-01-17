@@ -1,0 +1,54 @@
+{block content}
+<div class="container-fluid pt15" id="administrace">
+    <div class="row">
+        <div class="col-sm-3 col-md-2">
+            {include "left-menu.latte"}
+        </div>
+        <div class="col-sm-9 col-md-10">
+            <div id="admin-menuContent">
+                <h1>Administrace</h1>
+
+                {* KATEGORIE PRODUKTŮ *}
+                <div id="category">
+                    {form addNewCategoryForm}
+                        <div n:class="$form['name']->hasErrors() ? has-error, form-group, row">
+                            <div class="input-group  col-sm-6">
+                                {input name, class=>'form-control'}
+                                <div class="input-group-addon">
+                                    {input send}
+                                </div>
+                            </div>
+                        </div>
+                    {/form}
+                    <h2>Seznam existujících kategorií</h2>
+                    {snippet categories}
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Název kategorie</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr n:foreach="$categories as $category">
+                                <td>{$category->name}</td>
+                                <td n:class="$category->active == 1 ? text-success : text-danger">{$category->active == 1 ? 'aktivní' : 'neaktivní'}</td>
+                                <td><a n:if="$category->active == 1"
+                                       href="{link deactivateCategory!, $category->id}"
+                                       data-toggle="tooltip" title="Deaktivovat kategorii"
+                                       data-placement="top"><span
+                                                class="fa fa-times red"></span></a>
+                                    <a n:if="$category->active == 0" href="{link activateCategory!, $category->id}"
+                                       data-toggle="tooltip" title="Aktivovat kategorii" data-placement="top"><span
+                                                class="fa fa-check"></span></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    {/snippet}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

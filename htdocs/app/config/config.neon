@@ -26,6 +26,7 @@ services:
 	- App\Model\CartModel
 	- App\Model\OrderModel
 	- App\Model\IngredientModel
+	- App\Model\CategoryModel
 	- App\Forms\UserFormFactory
 	- App\Forms\CartFormFactory
 	- App\Forms\AdminFormFactory

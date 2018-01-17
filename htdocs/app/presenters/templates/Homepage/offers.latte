@@ -17,7 +17,12 @@
                             <h3 class="card-title">{$product['name']}</h3>
                             <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
                             <h5 class="card-subtitle mt5"><strong>{$product['weight']} g</strong></h5>
-                            <p class="card-text mt15">{$product['description']} </p>
+                            <p class="card-text mt15">{$product['description']} {if isset($productIngredients[$product['id']])}
+                                    <br>
+                                    <br>
+                                    <strong>Složení:</strong> <span
+                                            n:foreach="$productIngredients[$product['id']] as $ingredient">{$ingredient['ingredient_name']}{if $iterator->isLast()}{else}, {/if}</span> {/if}
+                            </p>
                             <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}"
                                class="btn order-product btn-primary">Objednat</a>
                         </div>
@@ -54,12 +59,12 @@
                     <p class="mb0 mt15"><strong>Cena celkem: {$priceTotal}&nbsp;Kč</strong></p>
                 {/snippet}
                 <a n:if="!empty($cart)" href="{link removeAllFromCart!}" class="btn btn-secondary mt5">Odebrat vše</a>
-                <a n:if="!empty($cart)" href="" data-toggle="modal" data-target="#orderModal" class="btn btn-primary mt5">Objednat</a>
+                <a n:if="!empty($cart)" href="" data-toggle="modal" data-target="#orderModal"
+                   class="btn btn-primary mt5">Objednat</a>
             </div>
             <p n:if="!$user->isLoggedIn()" class="pt15 pl15"><strong>Pro objednání se musíte přihlásit.</strong></p>
         </div>
     </div>
-
     {*MODAL PRO PŘIDÁNÍ DO KOŠÍKU*}
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
          aria-hidden="true">
@@ -98,7 +103,6 @@
             </div>
         </div>
     </div>
-
     {*MODAL PRO DOKONČENÍ OBJEDNÁVKY*}
     <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel"
          aria-hidden="true">
@@ -111,7 +115,6 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
                     <div class="modal-body">
                         {var $priceTotal = 0}
                         <div>
@@ -136,7 +139,8 @@
                             </table>
                         </div>
                         <p class="mb0 mt15"><strong>Cena celkem: {$priceTotal}&nbsp;Kč</strong></p>
-                        <p class="mt15">Odesláním objednávky souhlasíte s našimi <a href="{plink Homepage:vsp}"> všeobecnými podmínkami</a></p>
+                        <p class="mt15">Odesláním objednávky souhlasíte s našimi <a href="{plink Homepage:vsp}">
+                                všeobecnými podmínkami</a></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>

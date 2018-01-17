@@ -53,5 +53,5 @@ $(document).ready(function() {
                 item: 1
             }
         } ]
-    });
+    }), $(".select2").select2();
 });
