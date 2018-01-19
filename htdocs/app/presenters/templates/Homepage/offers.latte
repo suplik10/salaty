@@ -9,22 +9,26 @@
         <div class="products">
             <div n:foreach="$categories as $categoryName => $products">
                 <h2 id="{$categoryName|webalize}">{$categoryName}</h2>
-                <div n:foreach="$products as $product" class="col-xl-4 col-lg-6 col-md-12 product">
-                    <div class="card">
-                        <img class="card-img-top"
-                             src="{$product['img']}">
-                        <div class="card-body">
-                            <h3 class="card-title">{$product['name']}</h3>
-                            <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
-                            <h5 class="card-subtitle mt5"><strong>{$product['weight']} g</strong></h5>
-                            <p class="card-text mt15">{$product['description']} {if isset($productIngredients[$product['id']])}
-                                    <br>
-                                    <br>
-                                    <strong>Složení:</strong> <span
-                                            n:foreach="$productIngredients[$product['id']] as $ingredient">{$ingredient['ingredient_name']}{if $iterator->isLast()}{else}, {/if}</span> {/if}
-                            </p>
-                            <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}"
-                               class="btn order-product btn-primary">Objednat</a>
+                <div class="row">
+                    <div n:foreach="$products as $product" class="col-xl-4 col-lg-6 col-md-12 product">
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="{$product['img']}">
+                            <div class="card-body">
+                                <h3 class="card-title">{$product['name']}</h3>
+                                <h4 class="card-subtitle"><strong>{$product['price']} Kč</strong></h4>
+                                <h5 class="card-subtitle mt5"><strong>{$product['weight']} g</strong></h5>
+                                <p class="card-text mt15">{$product['description']} {if isset($productIngredients[$product['id']])}
+                                        <br>
+                                        <br>
+                                        <strong>Složení:</strong>
+                                        <span
+                                                n:foreach="$productIngredients[$product['id']] as $ingredient">{$ingredient['ingredient_name']}{if $iterator->isLast()}{else}, {/if}</span>
+                                    {/if}
+                                </p>
+                                <a n:if="$user->isLoggedIn()" data-link="{link getProductData!, $product['id']}"
+                                   class="btn order-product btn-primary">Objednat</a>
+                            </div>
                         </div>
                     </div>
                 </div>
