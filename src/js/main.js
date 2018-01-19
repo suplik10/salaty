@@ -53,7 +53,7 @@ $(document).ready(function () {
         /* prevHtml: '<i class="fa fa-chevron-left"></i>',
          nextHtml: '<i class="fa fa-chevron-right"></i>',*/
 
-        adaptiveHeight: true,
+        adaptiveHeight: false,
 
         enableTouch: true,
         enableDrag: true,

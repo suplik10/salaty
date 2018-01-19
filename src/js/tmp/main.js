@@ -36,7 +36,7 @@ $(document).ready(function() {
         slideEndAnimation: !0,
         controls: !1,
         pager: !0,
-        adaptiveHeight: !0,
+        adaptiveHeight: !1,
         enableTouch: !0,
         enableDrag: !0,
         freeMove: !0,
