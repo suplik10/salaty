@@ -84,8 +84,8 @@ class NotificationMail
             $mail->addBcc($this->bcc);
         }
 
-        $mailer = new SendmailMailer();
-        $mailer->send($mail);
+        //$mailer = new SendmailMailer();
+        //$mailer->send($mail);
 
     }
 
