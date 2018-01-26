@@ -1,0 +1,57 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+
+                    {* INGREDIENCE *}
+                    <div id="users">
+                        <h2 class="float-left">Správa uživatelů</h2>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Jméno</th>
+                                <th>Příjmení</th>
+                                <th>E-mail</th>
+                                <th>Telefon</th>
+                                <th>Ulice</th>
+                                <th>Město</th>
+                                <th>PSČ</th>
+                                <th>Role</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr n:foreach="$salatyUsers as $salatyUser">
+                                <td>{$salatyUser->firstname}</td>
+                                <td>{$salatyUser->lastname}</td>
+                                <td>{$salatyUser->email}</td>
+                                <td>{$salatyUser->phone}</td>
+                                <td>{$salatyUser->street}</td>
+                                <td>{$salatyUser->city}</td>
+                                <td>{$salatyUser->postalcode}</td>
+                                <td>{$salatyUser->role_name}</td>
+                                <td n:class="$salatyUser->active == 1 ? text-success : text-danger, align-middle">{$salatyUser->active == 1 ? 'aktivní' : 'neaktivní'}</td>
+                                <td class="align-middle"><a n:if="$salatyUser->active == 0"
+                                                            href="{link changeUserStatus!, $salatyUser->id, 1}"
+                                                            data-toggle="tooltip" title="Aktivovat uživatele"
+                                                            data-placement="top"><span
+                                                class="fa fa-check"></span></a>
+                                    <a n:if="$salatyUser->active == 1"
+                                       href="{link changeUserStatus!, $salatyUser->id, 0}"
+                                       data-toggle="tooltip" title="Deaktivovat uživatele" data-placement="top"><span
+                                                class="fa fa-times red"></span></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

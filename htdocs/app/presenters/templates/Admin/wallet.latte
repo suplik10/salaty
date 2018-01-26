@@ -1,0 +1,31 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+                    {* PRODUKTY *}
+                    <div id="wallet">
+                        <h2>Peněženka</h2>
+                        {form wallet}
+                            <div class="form-group">
+                                <div class="input-group  col-xl-6">
+                                    <div class="input-group-addon">
+                                    {input user_id, class=>'form-control'}
+                                    </div>
+                                    {input money, class=>'form-control'}
+                                    <div class="input-group-addon">
+                                        {input send}
+                                    </div>
+                                </div>
+                            </div>
+                        {/form}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

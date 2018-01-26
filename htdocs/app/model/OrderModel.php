@@ -68,9 +68,15 @@ class OrderModel
      * Returns ballance of user account
      * @param $userId
      */
-    public function getUserWallet($userId){
+    public function getUserWallet($userId)
+    {
         $order = $this->db->query("SELECT SUM(total_price) AS total_price FROM orders WHERE user_id = ?", $userId)->fetch();
         $wallet = $this->db->query("SELECT SUM(money) AS money FROM wallet WHERE user_id = ?", $userId)->fetch();
         return $wallet->money - $order->total_price;
+    }
+
+    public function getUserOrders($userId)
+    {
+        return $this->db->query("SELECT p2o.*, p.* FROM product2order p2o INNER JOIN product AS p ON p.id = p2o.product_id INNER JOIN orders AS o ON o.id = p2o.order_id WHERE o.user_id = ? ORDER BY p2o.date DESC", $userId);
     }
 }

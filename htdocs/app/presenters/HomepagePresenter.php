@@ -238,8 +238,8 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             throw new \Exception('Na tento datum nelze objednat.');
         }
 
-        if ($today->format('N') > 5) { //je víkend
-            throw new \Exception('O víkendu nelze objednávat.');
+        if ($today->format('N') > 6 && $today->format('H') >= 12 && $date->format('W') == ($today->format('W') + 1) && $date->format('N') == 1) { //je neděle a víc než 12:00
+            throw new \Exception('Na tento datum nelze objednat');
         }
 
         if ($today->format('N') == 5 && $today->format('H') >= 16 && $date->format('W') == ($today->format('W') + 1) && $date->format('N') == 1) { //je pátek > 16:00 a objednává na pondělí

@@ -18,6 +18,8 @@ use Nette\Application\UI\Presenter;
 use Nette\Neon\Exception;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
+use Nette\Utils\DateTime;
+use V\Services\NotificationMail;
 
 class SignPresenter extends Presenter
 {
@@ -62,7 +64,22 @@ class SignPresenter extends Presenter
         $values = $form->getValues();
         try {
             $this->userModel->isUserRegistered($values->email);
-            $this->userModel->register($values);
+            $user = $this->userModel->register($values);
+
+            $mailData = [
+                'date' => new DateTime(),
+                'firstname' => $values->firstname,
+                'lastname' => $values->lastname,
+                'email' => $values->email,
+                'phone' => $values->phone,
+                'street' => $values->street,
+                'city' => $values->city,
+                'postalcode' => $values->postalcode,
+                'factory' => $values->factory,
+                'link' => 'http://' . $_SERVER['HTTP_HOST'] . $this->presenter->link('Admin:default', ['do' => 'changeUserStatus', 'userId' => $user->id, 'status' => 1])
+            ];
+            $mail = new NotificationMail($mailData, 'cheaas@gmail.com', NotificationMail::NEW_REGISTRATION, 'SalátyObe - Nová registrace', $values->email);
+            $mail->send();
             $this->flashMessage('Registrace proběhla úspěšně.', 'success');
             $this->redirect('Homepage:default');
         } catch (AuthenticationException $e) {
@@ -119,6 +136,10 @@ class SignPresenter extends Presenter
     public function renderProfile()
     {
         $this->template->wallet = $this->orderModel->getUserWallet($this->user->getId());
+    }
+
+    public function renderOrders(){
+        $this->template->orders = $this->orderModel->getUserOrders($this->user->getId())->fetchAssoc('date[]');
     }
 
     protected function createComponentEditProfile()

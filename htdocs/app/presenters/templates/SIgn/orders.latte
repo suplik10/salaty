@@ -1,0 +1,23 @@
+{block content}
+    <div class="container pt30">
+        <h1>Seznam objednávek</h1>
+
+        <p n:if="empty($orders)">Nemáte žádné objednávky.</p>
+
+        <table class="table table-responsive-sm" n:foreach="$orders as $date => $order">
+            <thead class="thead-dark">
+            <tr>
+                <th colspan="4">{date('d. m. Y',strtotime($date))}</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr n:foreach="$order as $product">
+                <th>{$product['name']}</th>
+                <td>x{$product['quantity']}</td>
+                <td>{$product['price']*$product['quantity']}&nbsp;Kč</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{/block}

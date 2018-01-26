@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="{$basePath}/css/main.css?{time()}">
     <link rel="stylesheet" href="{$basePath}/css/lightslider.min.css?{time()}">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body data-spy="scroll" data-target="#categories" data-offset="0">
@@ -15,26 +17,40 @@
     <a class="navbar-brand mr-auto" href="{plink Homepage:default}">
         <img src="/images/logo_192_new.png" class="img-fluid logo">
     </a>
-    <ul class="navbar-nav justify-content-end">
-        <li n:if="$user->isInRole('admin')" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Admin:*') ? active" href="{plink Admin:default}">ADMINISTRACE</a>
-        </li>
-        <li class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active" href="{plink Homepage:offers}">NABÍDKA</a>
-        </li>
-        <li n:if="!$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:in') ? active" href="{plink Sign:in}">PŘIHLÁŠENÍ</a>
-        </li>
-        <li n:if="!$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:up') ? active" href="{plink Sign:up}">REGISTRACE</a>
-        </li>
-        <li n:if="$user->isLoggedIn()" class="nav-item">
-            <a n:class="nav-link, $presenter->isLinkCurrent('Sign:profile') ? active" href="{plink Sign:profile}">MŮJ ÚČET</a>
-        </li>
-        <li n:if="$user->isLoggedIn()" class="nav-item">
-            <a class="nav-link" href="{plink Sign:out}">ODHLÁŠENÍ</a>
-        </li>
-    </ul>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars text-white"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li n:if="$user->isInRole('admin')" class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Admin:*') ? active" href="{plink Admin:default}">ADMINISTRACE</a>
+            </li>
+            <li class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Homepage:offers') ? active"
+                   href="{plink Homepage:offers}">NABÍDKA</a>
+            </li>
+            <li n:if="!$user->isLoggedIn()" class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Sign:in') ? active"
+                   href="{plink Sign:in}">PŘIHLÁŠENÍ</a>
+            </li>
+            <li n:if="!$user->isLoggedIn()" class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Sign:up') ? active"
+                   href="{plink Sign:up}">REGISTRACE</a>
+            </li>
+            <li n:if="$user->isLoggedIn()" class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Sign:profile') ? active" href="{plink Sign:profile}">MŮJ
+                    ÚČET</a>
+            </li>
+            <li n:if="$user->isLoggedIn()" class="nav-item">
+                <a n:class="nav-link, $presenter->isLinkCurrent('Sign:orders') ? active" href="{plink Sign:orders}">MÉ
+                    OBJEDNÁVKY</a>
+            </li>
+            <li n:if="$user->isLoggedIn()" class="nav-item">
+                <a class="nav-link" href="{plink Sign:out}">ODHLÁŠENÍ</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 <div id="content">
     {*<div n:foreach="$flashes as $flash" n:class="alert, 'alert-'.$flash->type, alert-dismissible">{$flash->message}

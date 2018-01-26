@@ -12,6 +12,7 @@ namespace App\Forms;
 use App\Model\CategoryModel;
 use App\Model\IngredientModel;
 use App\Model\ProductModel;
+use App\Model\UserModel;
 use Nette\Application\UI\Form;
 
 class AdminFormFactory
@@ -33,13 +34,19 @@ class AdminFormFactory
     private $productModel;
 
     /**
+     * @var UserModel
+     */
+    private $userModel;
+
+    /**
      * AdminFormFactory constructor.
      */
-    public function __construct(CategoryModel $categoryModel, IngredientModel $ingredientModel, ProductModel $productModel)
+    public function __construct(CategoryModel $categoryModel, IngredientModel $ingredientModel, ProductModel $productModel, UserModel $userModel)
     {
         $this->categoryModel = $categoryModel;
         $this->ingredientModel = $ingredientModel;
         $this->productModel = $productModel;
+        $this->userModel = $userModel;
     }
 
     public function createNewIngredientsForm()
@@ -137,7 +144,8 @@ class AdminFormFactory
         return $form;
     }
 
-    public function createAddNewProduct(){
+    public function createAddNewProduct()
+    {
         $form = new Form();
         $form->addText('name', 'Název:')
             ->setAttribute('placeholder', '* Název')
@@ -172,13 +180,32 @@ class AdminFormFactory
             $ingredientsData[$ingredient->id] = $ingredient->name;
         }
 
-        $form->addMultiSelect('ingredients', 'Ingredience:', $ingredientsData);
+        //$form->addMultiSelect('ingredients', 'Ingredience:', $ingredientsData);
 
         $form->addUpload('img', 'Obrázek:')->setRequired();
 
         $form->addSubmit('send', 'Vytvořit')
             ->setAttribute('class', 'btn btn-primary');
 
+        return $form;
+    }
+
+    public function createWallet()
+    {
+        $form = new Form();
+        $users = $this->userModel->getAllUsers()->fetchAll();
+
+        $userData = [];
+        foreach ($users as $user) {
+            $userData[$user->id] = $user->factory ? $user->factory . ' (' . $user->firstname . ' ' . $user->lastname . ')' : $user->firstname . ' ' . $user->lastname ;
+        }
+        $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired();
+        $form->addInteger('money', 'Zaplacená částka:')
+            ->setAttribute('placeholder', '* Zaplacená částka')
+            ->setRequired();
+
+        $form->addSubmit('send', 'Uložit')
+            ->setAttribute('class', 'btn btn-primary');
         return $form;
     }
 }

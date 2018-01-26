@@ -11089,4 +11089,7 @@ a:not([href]):not([tabindex]) {
 .modal-dialog {
   z-index: 1051; }
 
+.navbar-light .navbar-toggler {
+  border-color: #fff; }
+
 /*# sourceMappingURL=main.css.map */

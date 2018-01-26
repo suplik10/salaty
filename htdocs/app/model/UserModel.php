@@ -21,6 +21,8 @@ class UserModel
      */
     private $db;
 
+    const USER_ROLE_ADMIN = 2;
+
     public function __construct(Context $db)
     {
         $this->db = $db;
@@ -44,11 +46,14 @@ class UserModel
     /**
      * User registration
      * @param $userData
+     * @return bool|\Nette\Database\IRow|\Nette\Database\Row
      */
     public function register($userData)
     {
         $userData['password'] = Passwords::hash($userData['password']);
         $this->db->query('INSERT INTO user', $userData);
+        $user = $this->db->query("SELECT * FROM user ORDER BY id DESC LIMIT 1 ")->fetch();
+        return $user;
     }
 
     /**
@@ -120,5 +125,14 @@ class UserModel
     {
         $user = $this->db->query('SELECT * FROM user WHERE id = ?', $userId)->fetch();
         return $user;
+    }
+
+    public function changeUserStatus($userId, $status)
+    {
+        $this->db->query("UPDATE user SET active = ? WHERE id = ?", $status, $userId);
+    }
+
+    public function getAllUsers(){
+        return $this->db->query("SELECT u.*, ur.name AS role_name FROM user AS u INNER JOIN user_role AS ur ON ur.id = u.user_role_id ");
     }
 }

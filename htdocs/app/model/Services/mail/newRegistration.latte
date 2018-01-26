@@ -1,0 +1,47 @@
+<div>
+    <p>Nová registrace uživatele {$date->format('d. m. Y H:i')}.</p>
+    <table>
+        <tbody>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Jméno:</th>
+            <td>{$firstname}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Příjmení:</th>
+            <td>{$lastname}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Email:</th>
+            <td>{$email}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Telefon:</th>
+            <td>{$phone}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Ulice:</th>
+            <td>{$street}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Město:</th>
+            <td>{$city}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">PSČ:</th>
+            <td>{$postalcode}</td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 5px;">Firma:</th>
+            <td>{$factory ? $factory : '---'}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <td style="background: #00BF43; padding: 10px 8px; color:#fff;" width="100" align="center"
+                valign="middle">
+                <a style="color: #fff;" href="{$link}">SCHVÁLIT UŽIVATELE</a>
+            </td>
+        </tr>
+    </table>
+</div>

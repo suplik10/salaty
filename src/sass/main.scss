@@ -105,7 +105,8 @@ a {
     color: $lighter-green;
   }
 }
-a:not([href]):not([tabindex]){
+
+a:not([href]):not([tabindex]) {
   color: #fff;
 }
 
@@ -156,6 +157,10 @@ a:not([href]):not([tabindex]){
   max-height: 40px;
 }
 
-.modal-dialog{
+.modal-dialog {
   z-index: 1051;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: #fff;
 }
