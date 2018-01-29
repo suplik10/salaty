@@ -197,7 +197,8 @@ class AdminFormFactory
 
         $userData = [];
         foreach ($users as $user) {
-            $userData[$user->id] = $user->factory ? $user->factory . ' (' . $user->firstname . ' ' . $user->lastname . ')' : $user->firstname . ' ' . $user->lastname ;
+            $balance = $user->balance ? $user->balance . ' Kč' : '0 Kč';
+            $userData[$user->id] = $user->factory ? $user->factory . ' (' . $balance . ')' : $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
         }
         $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired();
         $form->addInteger('money', 'Zaplacená částka:')
