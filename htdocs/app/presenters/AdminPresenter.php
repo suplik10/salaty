@@ -84,6 +84,18 @@ class AdminPresenter extends Presenter
     public $date;
 
     /**
+     * @var
+     * @persistent
+     */
+    public $dateFrom;
+
+    /**
+     * @var
+     * @persistent
+     */
+    public $dateTo;
+
+    /**
      * @var OrderModel
      * @inject
      */
@@ -192,6 +204,22 @@ class AdminPresenter extends Presenter
         $this->template->date = new DateTime($this->date);
         $this->template->products = $this->orderModel->getProductOrdersByDate($this->date)->fetchAll();
         $this->template->ingredients = $this->orderModel->getProductIngredientsByDate($this->date)->fetchAll();
+    }
+
+    public function renderOrdersTerm()
+    {
+        if (empty($this->dateFrom)) {
+            $date = new DateTime('+1 day');
+            $this->dateFrom = $date->format('Y-m-d');
+        }
+        if (empty($this->dateTo)) {
+            $date = new DateTime('+2 day');
+            $this->dateTo = $date->format('Y-m-d');
+        }
+        $this->template->dateFrom = new DateTime($this->dateFrom);
+        $this->template->dateTo = new DateTime($this->dateTo);
+        $this->template->products = $this->orderModel->getProductOrdersByTerm($this->dateFrom, $this->dateTo)->fetchAll();
+        $this->template->ingredients = $this->orderModel->getProductIngredientsByTerm($this->dateFrom, $this->dateTo)->fetchAll();
     }
 
     protected function createComponentAddNewCategoryForm()
@@ -391,6 +419,20 @@ class AdminPresenter extends Presenter
     public function changeDateSucceeded(Form $form){
         $values = $form->getValues();
         $this->date = $values->date;
+        $this->redrawControl();
+    }
+
+    protected function createComponentChangeTermForm(){
+        $form = $this->adminForm->createChangeTerm($this->dateFrom, $this->dateTo);
+        $form->onSuccess[] = [$this, 'changeTermSucceeded'];
+
+        return $form;
+    }
+
+    public function changeTermSucceeded(Form $form){
+        $values = $form->getValues();
+        $this->dateFrom = $values->dateFrom;
+        $this->dateTo = $values->dateTo;
         $this->redrawControl();
     }
 }

@@ -220,4 +220,21 @@ class AdminFormFactory
             ->setAttribute('class', 'btn btn-primary');
         return $form;
     }
+
+    public function createChangeTerm($dateFrom, $dateTo){
+        $form = new Form();
+        $form->addText('dateFrom', 'Datum od:')
+            ->setDefaultValue($dateFrom)
+            ->setHtmlType('date')
+            ->setRequired();
+
+        $form->addText('dateTo', 'Datum do:')
+            ->setDefaultValue($dateTo)
+            ->setHtmlType('date')
+            ->setRequired();
+
+        $form->addSubmit('send', 'Změnit')
+            ->setAttribute('class', 'btn btn-primary');
+        return $form;
+    }
 }

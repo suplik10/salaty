@@ -1,0 +1,77 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+
+                    {* OBJEDNÁVKY *}
+                    <div id="orders-day">
+                        {snippet orders-term}
+                        {form changeTermForm}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input-group col-xl-6 mb15">
+                                        <div class="input-group-addon">
+                                            {label dateFrom}
+                                        </div>
+                                        {input dateFrom, class=>'form-control'}
+                                    </div>
+                                    <div class="input-group col-xl-6 mb15">
+                                        <div class="input-group-addon">
+                                            {label dateTo}
+                                        </div>
+                                        {input dateTo, class=>'form-control'}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {input send}
+                            </div>
+                        {/form}
+                            <h2>Objednávky v termínu od {$dateFrom->format('d. m.')} - {$dateTo->format('d. m. Y')}  </h2>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Produkt</th>
+                                    <th>Množství</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$products as $product">
+                                    <th>{$product->name}</th>
+                                    <th>x{$product->quantity}</th>
+                                </tr>
+                                <tr n:if="empty($products)">
+                                    <td>V tomto termínu nejsou objednány žádné produkty.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Ingredience</th>
+                                    <th>Váha (v gramech)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$ingredients as $ingredient">
+                                    <th>{$ingredient->name}</th>
+                                    <th>{$ingredient->total_weight}g</th>
+                                </tr>
+                                <tr n:if="empty($ingredients)">
+                                    <td>V tomto termínu nejsou objednány žádné produkty.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
