@@ -7306,6 +7306,8 @@ a.text-dark:focus, a.text-dark:hover {
     border-bottom: 2px solid #03bf00;
     padding-bottom: 4px;
     margin-top: 15px; }
+  .products h3 {
+    font-size: 23px; }
   @media (min-width: 769px) {
     .products {
       width: calc(100vw - 330px - 200px - 45px); } }
