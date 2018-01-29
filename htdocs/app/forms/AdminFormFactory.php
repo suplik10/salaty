@@ -197,7 +197,8 @@ class AdminFormFactory
 
         $userData = [];
         foreach ($users as $user) {
-            $balance = $user->balance ? $user->balance . ' Kč' : '0 Kč';
+            $userBalance = $user->wallet_balance - $user->order_balance;
+            $balance = $userBalance ?  $userBalance . ' Kč' : '0 Kč';
             $userData[$user->id] = $user->factory ? $user->factory . ' (' . $balance . ')' : $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
         }
         $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired();
