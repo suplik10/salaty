@@ -7312,7 +7312,8 @@ a.text-dark:focus, a.text-dark:hover {
   @media (max-width: 768px) {
     .products {
       margin-left: 0px;
-      width: calc(100vw - 330px - 45px); } }
+      width: 100%;
+      float: right; } }
 
 .alert {
   margin-bottom: 16px;
@@ -7418,7 +7419,9 @@ label {
     overflow: auto; }
   @media (max-width: 767px) {
     .cart {
-      width: auto; } }
+      width: 100%;
+      position: relative;
+      float: left; } }
 
 .btn-primary {
   color: #fff;
@@ -11012,6 +11015,9 @@ body {
 .mt15 {
   margin-top: 15px; }
 
+.mb15 {
+  margin-bottom: 15px; }
+
 .mt30 {
   margin-top: 30px; }
 
@@ -11027,8 +11033,20 @@ body {
 .mr50 {
   margin-right: 50px; }
 
+@media (max-width: 767px) {
+  .mb15-sm {
+    margin-bottom: 15px; } }
+
+@media (max-width: 575px) {
+  .pt15-xs {
+    padding-top: 15px; } }
+
 .bt-2 {
   border-top: 2px solid #fff; }
+
+@media (max-width: 575px) {
+  .bt-xs-2 {
+    border-top: 2px solid #fff; } }
 
 .f-23 {
   font-size: 23px; }

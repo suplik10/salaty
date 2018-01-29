@@ -160,4 +160,19 @@ class UserFormFactory
 
         return $form;
     }
+
+
+    public function lostPassword(){
+        $form = new Form();
+
+        $form->addEmail('email', 'E-mail:')
+            ->setAttribute('placeholder', '* E-mail')
+            ->setRequired();
+
+        $form->addSubmit('send', 'Odeslat')
+            ->setAttribute('class', 'btn btn-primary');
+
+
+        return $form;
+    }
 }

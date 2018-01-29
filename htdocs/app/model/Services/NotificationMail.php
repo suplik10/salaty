@@ -11,7 +11,8 @@ use Nette\Mail\SendmailMailer;
 class NotificationMail
 {
     const
-        NEW_REGISTRATION = 'newRegistration.latte';
+        NEW_REGISTRATION = 'newRegistration.latte',
+        LOST_PASSWORD = 'lostPassword.latte';
 
     /**
      * @var

@@ -49,7 +49,7 @@ $(document).ready(function () {
         slideEndAnimation: true,
 
         controls: false,
-        pager: true,
+        pager: false,
         /* prevHtml: '<i class="fa fa-chevron-left"></i>',
          nextHtml: '<i class="fa fa-chevron-right"></i>',*/
 

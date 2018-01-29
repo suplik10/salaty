@@ -58,6 +58,10 @@ body {
   margin-top: 15px;
 }
 
+.mb15 {
+  margin-bottom: 15px;
+}
+
 .mt30 {
   margin-top: 30px;
 }
@@ -78,8 +82,26 @@ body {
   margin-right: 50px;
 }
 
+.mb15-sm {
+  @media (max-width: 767px){
+    margin-bottom: 15px;
+  }
+}
+
+.pt15-xs {
+  @media (max-width: 575px) {
+    padding-top: 15px;
+  }
+}
+
 .bt-2 {
   border-top: 2px solid #fff;
+}
+
+.bt-xs-2 {
+  @media (max-width: 575px) {
+    border-top: 2px solid #fff;
+  }
 }
 
 .f-23 {

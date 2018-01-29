@@ -21642,7 +21642,7 @@ var bootstrap = function(a, b) {
         pause: 2500,
         slideEndAnimation: !0,
         controls: !1,
-        pager: !0,
+        pager: !1,
         adaptiveHeight: !1,
         enableTouch: !0,
         enableDrag: !0,

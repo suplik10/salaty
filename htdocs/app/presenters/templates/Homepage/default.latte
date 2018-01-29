@@ -39,7 +39,7 @@
     </div>
     <div class="container mb30">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb15-sm">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Provozní řád</h4>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb15-sm">
                 <div class="card">
                     <div class="card-body">
                         <ul id="lightSlider-interests">
@@ -113,6 +113,7 @@
                                 </div>
                             {/form}
                              <p class="mb0">Nemáte účet ? Registrujte se <a n:if="!$user->isLoggedIn()" href="{plink Sign:up}">ZDE</a>.</p>
+                            <p><a href="{plink Sign:lostPassword}">Zapomenuté heslo</a></p>
                         </div>
                         <div n:if="$user->isLoggedIn()" class="text-center">
                             <p>Jste přihlášen jako <a href="{plink Sign:profile}">{$user->identity->firstname} {$user->identity->lastname}</a></p>

@@ -10,7 +10,9 @@
     overflow: auto;
   }
   @media (max-width: 767px) {
-    width: auto;
+    width: 100%;
+    position: relative;
+    float:left;
   }
 
 }

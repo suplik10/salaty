@@ -19,6 +19,7 @@ use Nette\Neon\Exception;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
 use Nette\Utils\DateTime;
+use Nette\Utils\Random;
 use V\Services\NotificationMail;
 
 class SignPresenter extends Presenter
@@ -138,7 +139,8 @@ class SignPresenter extends Presenter
         $this->template->wallet = $this->orderModel->getUserWallet($this->user->getId());
     }
 
-    public function renderOrders(){
+    public function renderOrders()
+    {
         $this->template->orders = $this->orderModel->getUserOrders($this->user->getId())->fetchAssoc('date[]');
     }
 
@@ -232,6 +234,37 @@ class SignPresenter extends Presenter
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
+    }
+
+    protected function createComponentLostPassword()
+    {
+        $form = $this->userForm->lostPassword();
+        $form->onSuccess[] = [$this, 'lostPasswordSucceeded'];
+
+        return $form;
+    }
+
+    public function lostPasswordSucceeded(Form $form)
+    {
+        $values = $form->getValues();
+        try {
+            $user = $this->userModel->getUserByEmail($values->email)->fetch();
+            if (!$user) {
+                throw new \Exception('Účet s tímto e-mailem neexistuje.');
+            }
+            $password = Random::generate(6);
+            $this->userModel->changeUserPassword($password, $user->id);
+            $mailData = [
+                'password' => $password,
+                'link' => $this->presenter->link('Sign:profile')
+            ];
+            $mail = new NotificationMail($mailData, $values->email, NotificationMail::LOST_PASSWORD, 'SalátyObe - Zapomenuté heslo', 'salatyob@seznam.cz');
+            $mail->send();
+            $this->flashMessage('Nové heslo Vám bylo zasláno na e-mail.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+
     }
 
 }

@@ -132,7 +132,18 @@ class UserModel
         $this->db->query("UPDATE user SET active = ? WHERE id = ?", $status, $userId);
     }
 
-    public function getAllUsers(){
+    public function getAllUsers()
+    {
         return $this->db->query("SELECT u.*, ur.name AS role_name FROM user AS u INNER JOIN user_role AS ur ON ur.id = u.user_role_id ");
+    }
+
+    public function getUserByEmail($email)
+    {
+        return $this->db->query("SELECT * FROM user WHERE email = ?", $email);
+    }
+
+    public function changeUserPassword($password, $userId)
+    {
+        $this->db->query("UPDATE user SET password = ? WHERE id = ?", Passwords::hash($password), $userId);
     }
 }
