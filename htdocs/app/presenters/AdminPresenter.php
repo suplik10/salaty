@@ -13,12 +13,14 @@ use App\Forms\AdminFormFactory;
 use App\Forms\UserFormFactory;
 use App\Model\CategoryModel;
 use App\Model\IngredientModel;
+use App\Model\OrderModel;
 use App\Model\ProductModel;
 use App\Model\UserModel;
 use App\Model\WalletModel;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 use Nette\Http\FileUpload;
+use Nette\Utils\DateTime;
 use Nette\Utils\Image;
 use Nette\Utils\Strings;
 
@@ -74,6 +76,18 @@ class AdminPresenter extends Presenter
      * @inject
      */
     public $walletModel;
+
+    /**
+     * @var
+     * @persistent
+     */
+    public $date;
+
+    /**
+     * @var OrderModel
+     * @inject
+     */
+    public $orderModel;
 
     public function beforeRender()
     {
@@ -167,6 +181,17 @@ class AdminPresenter extends Presenter
     public function renderUsers()
     {
         $this->template->salatyUsers = $this->userModel->getAllUsers()->fetchAll();
+    }
+
+    public function renderOrdersDay()
+    {
+        if (empty($this->date)) {
+            $date = new DateTime('+1 day');
+            $this->date = $date->format('Y-m-d');
+        }
+        $this->template->date = new DateTime($this->date);
+        $this->template->products = $this->orderModel->getProductOrdersByDate($this->date)->fetchAll();
+        $this->template->ingredients = $this->orderModel->getProductIngredientsByDate($this->date)->fetchAll();
     }
 
     protected function createComponentAddNewCategoryForm()
@@ -354,5 +379,18 @@ class AdminPresenter extends Presenter
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         }
+    }
+
+    protected function createComponentChangeDateForm(){
+        $form = $this->adminForm->createChangeDate($this->date);
+        $form->onSuccess[] = [$this, 'changeDateSucceeded'];
+
+        return $form;
+    }
+
+    public function changeDateSucceeded(Form $form){
+        $values = $form->getValues();
+        $this->date = $values->date;
+        $this->redrawControl();
     }
 }

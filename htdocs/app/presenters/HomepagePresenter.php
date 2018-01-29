@@ -212,6 +212,9 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
         try {
             $cart = $this->cartModel->getCart($this->user->getId())->fetchAll();
+            if (!$cart) {
+                throw new \Exception('Objednávka nesmí být prázdná.');
+            }
             $totalPrice = 0;
             foreach ($cart as $product) {
                 $totalPrice = $totalPrice + ($product->price * $product->count);
@@ -231,7 +234,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function validateOrder(Nette\Utils\DateTime $date, $categoryId)
     {
-        $today = new Nette\Utils\DateTime('2018-01-19 17:00');
+        $today = new Nette\Utils\DateTime();
         $tomorrow = new Nette\Utils\DateTime('+1 day');
 
         if ($today->format('Y-m-d') >= $date->format('Y-m-d')) {
@@ -239,7 +242,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         }
 
         if ($today->format('N') > 6 && $today->format('H') >= 12 && $date->format('W') == ($today->format('W') + 1) && $date->format('N') == 1) { //je neděle a víc než 12:00
-            throw new \Exception('Na tento datum nelze objednat');
+            throw new \Exception('Na tento datum nelze objednat.');
         }
 
         if ($today->format('N') == 5 && $today->format('H') >= 16 && $date->format('W') == ($today->format('W') + 1) && $date->format('N') == 1) { //je pátek > 16:00 a objednává na pondělí

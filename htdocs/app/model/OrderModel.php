@@ -79,4 +79,14 @@ class OrderModel
     {
         return $this->db->query("SELECT p2o.*, p.* FROM product2order p2o INNER JOIN product AS p ON p.id = p2o.product_id INNER JOIN orders AS o ON o.id = p2o.order_id WHERE o.user_id = ? ORDER BY p2o.date DESC", $userId);
     }
+
+    public function getProductOrdersByDate($date)
+    {
+        return $this->db->query("SELECT p2o.*, p.* FROM product2order AS p2o INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? ", $date);
+    }
+
+    public function getProductIngredientsByDate($date)
+    {
+        return $this->db->query("SELECT i2p.weight * p2o.quantity AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY i2p.ingredient_id", $date);
+    }
 }

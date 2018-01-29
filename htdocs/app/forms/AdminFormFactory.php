@@ -208,4 +208,16 @@ class AdminFormFactory
             ->setAttribute('class', 'btn btn-primary');
         return $form;
     }
+
+    public function createChangeDate($date){
+        $form = new Form();
+        $form->addText('date', 'Datum:')
+            ->setDefaultValue($date)
+            ->setHtmlType('date')
+            ->setRequired();
+
+        $form->addSubmit('send', 'Změnit')
+            ->setAttribute('class', 'btn btn-primary');
+        return $form;
+    }
 }
