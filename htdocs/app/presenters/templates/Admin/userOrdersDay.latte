@@ -1,0 +1,59 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+
+                    {* OBJEDNÁVKY *}
+                    <div id="orders-day">
+                        {snippet user-orders-day}
+                        {form changeDateForm}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input-group col-xl-6">
+                                        <div class="input-group-addon">
+                                            {label date}
+                                        </div>
+                                        {input date, class=>'form-control'}
+                                        <div class="input-group-addon">
+                                            {input send}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {/form}
+                            <h2>Objednávky na {$date->format('d. m. Y')} dle uživatelů</h2>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Uživatel</th>
+                                    <th>Produkty</th>
+                                    <th>Celkem cena</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$usersWithOrders as $userWithOrder">
+                                    {var $totalPrice = 0}
+                                    <td>{$userWithOrder['factory'] ? $userWithOrder['factory'] . ' (' . $userWithOrder['firstname'] . ' ' . $userWithOrder['lastname']  . ')' : $userWithOrder['firstname'] . ' ' . $userWithOrder['lastname'] }</td>
+                                    <td>
+                                        <span n:foreach="$usersWithProducts[$userWithOrder['user_id']] as $userWithProduct">{$userWithProduct['name']}
+                                            x{$userWithProduct['quantity']}{$iterator->isLast() ? ' ' : ', '}{var $totalPrice = $totalPrice + ($userWithProduct['quantity'] * $userWithProduct['product_price'])}</span>
+                                    </td>
+                                    <td>{$totalPrice} Kč</td>
+                                </tr>
+                                <tr n:if="empty($usersWithOrders)">
+                                    <td>Na tento den nejsou žádné objednávky.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

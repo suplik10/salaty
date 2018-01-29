@@ -206,6 +206,18 @@ class AdminPresenter extends Presenter
         $this->template->ingredients = $this->orderModel->getProductIngredientsByDate($this->date)->fetchAll();
     }
 
+    public function renderUserOrdersDay()
+    {
+        if (empty($this->date)) {
+            $date = new DateTime('+1 day');
+            $this->date = $date->format('Y-m-d');
+        }
+        $this->template->date = new DateTime($this->date);
+
+        $this->template->usersWithProducts = $this->orderModel->getUsersOrdersByDate($this->date)->fetchAssoc('user_id[]');
+        $this->template->usersWithOrders = $this->orderModel->getUsersOrdersByDate($this->date)->fetchAssoc('user_id');
+    }
+
     public function renderOrdersTerm()
     {
         if (empty($this->dateFrom)) {
