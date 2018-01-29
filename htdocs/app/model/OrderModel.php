@@ -70,7 +70,7 @@ class OrderModel
      */
     public function getUserWallet($userId)
     {
-        $order = $this->db->query("SELECT SUM(total_price) AS total_price FROM orders WHERE user_id = ?", $userId)->fetch();
+        $order = $this->db->query("SELECT SUM(p2o.quantity * p2o.product_price) AS total_price FROM orders AS o INNER JOIN product2order AS p2o ON p2o.order_id = o.id WHERE o.user_id = ?", $userId)->fetch();
         $wallet = $this->db->query("SELECT SUM(money) AS money FROM wallet WHERE user_id = ?", $userId)->fetch();
         return $wallet->money - $order->total_price;
     }
