@@ -22435,7 +22435,7 @@ var bootstrap = function(a, b) {
         "ý": "y",
         "ž": "z"
     }, Nette;
-}), $(document).on("click touch", ".order-product", function(a) {
+}), $(document).on("click touchstart", ".order-product", function(a) {
     var b = $(this).attr("data-link");
     $.nette.ajax({
         type: "POST",
