@@ -10,6 +10,7 @@ use App\Model\ProductModel;
 use App\Model\UserManager;
 use App\Model\UserModel;
 use Nette;
+use V\Services\NotificationMail;
 
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
@@ -222,13 +223,25 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
             }
             $date = new Nette\Utils\DateTime();
 
+            $mailCart = $this->cartModel->getCart($this->user->getId())->fetchAssoc('date[]');
+
             $order = $this->orderModel->createOrder($this->user->getId(), $totalPrice, $date);
             $this->orderModel->addProductsToOrder($cart, $order->id);
             $this->cartModel->removeAllFromCart($this->user->getId());
+
+
+            $mailData= [
+                'cart' => $mailCart,
+                'orderDate' => $date->format('d. m. Y H:i')
+            ];
+            $mail = new NotificationMail($mailData, $this->user->identity->email, NotificationMail::ORDER, 'SalátyObe - Shrnutí objednávky');
+            $mail->setBcc('salatyob@seznam.cz');
+            $mail->send();
+
             $this->flashMessage('Objednávka proběhla úspěšně. Na Vaši e-mailovou adresu byl zaslán email se souhrnem objednávky.', 'success');
 
         } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'error');
+            $this->flashMessage($e->getMessage(), 'danger');
         }
     }
 

@@ -1,4 +1,4 @@
-$(document).on("click", ".order-product", function(a) {
+$(document).on("click touch", ".order-product", function(a) {
     var b = $(this).attr("data-link");
     $.nette.ajax({
         type: "POST",

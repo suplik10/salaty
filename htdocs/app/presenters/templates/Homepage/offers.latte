@@ -50,7 +50,7 @@
 
                             <tr n:foreach="$cartProducts as $cartProduct">
                                 {var $priceTotal = $priceTotal + ($cartProduct['price'] * $cartProduct['count'])}
-                                <th>{$cartProduct['name']}</th>
+                                <th style="width: 60%;">{$cartProduct['name']}</th>
                                 <td>x{$cartProduct['count']}</td>
                                 <td>{$cartProduct['price']*$cartProduct['count']}&nbsp;Kč</td>
                                 <td><a href="{link removeProductFromCart!, $cartProduct['cartId']}"
@@ -132,7 +132,7 @@
 
                                 <tr n:foreach="$cartProducts as $cartProduct">
                                     {var $priceTotal = $priceTotal + ($cartProduct['price'] * $cartProduct['count'])}
-                                    <th>{$cartProduct['name']}</th>
+                                    <th style="width:65%;">{$cartProduct['name']}</th>
                                     <td>x{$cartProduct['count']}</td>
                                     <td>{$cartProduct['price']*$cartProduct['count']}&nbsp;Kč</td>
                                     {*<td><a href="{link removeProductFromCart!, $cartProduct['cartId']}"

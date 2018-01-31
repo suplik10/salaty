@@ -1,0 +1,25 @@
+<div>
+    <p>Dobrý den, <br><br>děkujeme za Vaši objednávku dne {$orderDate}</p>
+    {var $priceTotal = 0}
+    <table n:foreach="$cart as $date => $cartProducts" style="margin-top:10px;" cellspacing="0" cellpadding="5">
+        <thead >
+        <tr>
+            <th colspan="3"style="text-align: left; border-bottom: 2px solid #ddd; background: #000; color:#fff;">{date('d. m. Y',strtotime($date))}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr n:foreach="$cartProducts as $cartProduct">
+            {var $priceTotal = $priceTotal + ($cartProduct['price'] * $cartProduct['count'])}
+            <th style="text-align: left; width: 200px; border-bottom: 1px solid #ddd;">{$cartProduct['name']}</th>
+            <td style="border-bottom: 1px solid #ddd;">x{$cartProduct['count']}</td>
+            <td style="border-bottom: 1px solid #ddd;">{$cartProduct['price']*$cartProduct['count']}&nbsp;Kč</td>
+        </tr>
+        <tr n:if="$iterator->isLast()">
+            <th colspan="2" style="text-align: left; border-top:2px solid #ddd;">Cena celkem:</th>
+            <td style="border-top:2px solid #ddd;">{$priceTotal} Kč</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>Na seznam svých objednávek se můžete podívat po přihlášení na našich webových stránkách.</p>
+</div>

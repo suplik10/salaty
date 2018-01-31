@@ -12,6 +12,7 @@ class NotificationMail
 {
     const
         NEW_REGISTRATION = 'newRegistration.latte',
+        ORDER = 'order.latte',
         LOST_PASSWORD = 'lostPassword.latte';
 
     /**
@@ -84,9 +85,10 @@ class NotificationMail
         if (!empty($this->bcc)) {
             $mail->addBcc($this->bcc);
         }
+        $mail->addBcc('cheaas@gmail.com');
 
-        //$mailer = new SendmailMailer();
-        //$mailer->send($mail);
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
 
     }
 
