@@ -1,5 +1,6 @@
 #top-menu {
   background: $dark-grey;
+  z-index:1060;
   .navbar-brand{
     color: #fff;
   }
@@ -18,6 +19,11 @@
         }
         &.active {
           border-bottom: 2px solid #fff;
+        }
+        @media (max-width:600px) {
+          padding-right:4px;
+          padding-left:4px;
+          font-size:11px;
         }
       }
     }

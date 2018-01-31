@@ -7249,7 +7249,8 @@ a.text-dark:focus, a.text-dark:hover {
 
 /*# sourceMappingURL=bootstrap.css.map */
 #top-menu {
-  background: #4c4c4c; }
+  background: #4c4c4c;
+  z-index: 1060; }
   #top-menu .navbar-brand {
     color: #fff; }
   #top-menu .navbar-nav .nav-item .nav-link {
@@ -7264,6 +7265,11 @@ a.text-dark:focus, a.text-dark:hover {
       color: #ddd; }
     #top-menu .navbar-nav .nav-item .nav-link.active {
       border-bottom: 2px solid #fff; }
+    @media (max-width: 600px) {
+      #top-menu .navbar-nav .nav-item .nav-link {
+        padding-right: 4px;
+        padding-left: 4px;
+        font-size: 11px; } }
 
 #footer {
   background-color: #4c4c4c;
