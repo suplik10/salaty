@@ -27,6 +27,23 @@ $(document).ready(function() {
         swipeThreshold: 40,
         pauseOnHover: !0,
         responsive: []
+    }), $("#lightSlider-rules").lightSlider({
+        item: 1,
+        slideMargin: 10,
+        auto: !0,
+        loop: !0,
+        pause: 5e3,
+        slideEndAnimation: !0,
+        controls: !1,
+        pager: !0,
+        prevHtml: '<i class="fa fa-chevron-left"></i>',
+        nextHtml: '<i class="fa fa-chevron-right"></i>',
+        enableTouch: !0,
+        enableDrag: !0,
+        freeMove: !0,
+        swipeThreshold: 40,
+        pauseOnHover: !0,
+        responsive: []
     }), $("#lightSlider").lightSlider({
         item: 3,
         slideMargin: 15,

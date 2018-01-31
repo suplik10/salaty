@@ -7278,7 +7278,7 @@ a.text-dark:focus, a.text-dark:hover {
       color: #fff; }
 
 .product {
-  margin-top: 10px; }
+  margin-top: 15px; }
 
 .left-menu {
   width: 200px;
@@ -7302,12 +7302,32 @@ a.text-dark:focus, a.text-dark:hover {
 .products {
   margin-left: 200px;
   float: left; }
+  .products .row {
+    display: flex;
+    flex-wrap: wrap; }
   .products h2 {
     border-bottom: 2px solid #03bf00;
     padding-bottom: 4px;
     margin-top: 15px; }
   .products h3 {
-    font-size: 23px; }
+    font-size: 18px; }
+  .products h4 {
+    font-size: 20px; }
+  .products h5 {
+    font-size: 17px; }
+  .products .anchor {
+    margin-top: -66px;
+    padding-bottom: 66px;
+    display: block; }
+  .products .product {
+    display: flex; }
+    .products .product .card .card-body {
+      padding: 10px;
+      padding-bottom: 50px; }
+      .products .product .card .card-body .card-subtitle {
+        margin-top: 0px; }
+      .products .product .card .card-body .card-text {
+        font-size: 15px; }
   @media (min-width: 769px) {
     .products {
       width: calc(100vw - 330px - 200px - 45px); } }
@@ -7435,7 +7455,12 @@ label {
     color: #fff; }
 
 .order-product {
-  color: #fff !important; }
+  color: #fff !important;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 10px;
+  min-width: 90px; }
 
 #administrace .nav-pills .nav-link.active {
   background-color: #03bf00; }

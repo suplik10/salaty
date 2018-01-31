@@ -39,6 +39,28 @@ $(document).ready(function () {
 
         responsive: [],
     });
+    $("#lightSlider-rules").lightSlider({
+        item: 1,
+
+        slideMargin: 10,
+        auto: true,
+        loop: true,
+        pause: 5000,
+        slideEndAnimation: true,
+
+        controls: false,
+        pager: true,
+        prevHtml: '<i class="fa fa-chevron-left"></i>',
+        nextHtml: '<i class="fa fa-chevron-right"></i>',
+
+        enableTouch: true,
+        enableDrag: true,
+        freeMove: true,
+        swipeThreshold: 40,
+        pauseOnHover: true,
+
+        responsive: [],
+    });
     $("#lightSlider").lightSlider({
         item: 3,
 

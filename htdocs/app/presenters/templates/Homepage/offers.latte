@@ -8,7 +8,7 @@
         </nav>
         <div class="products">
             <div n:foreach="$categories as $categoryName => $products">
-                <h2 id="{$categoryName|webalize}">{$categoryName}</h2>
+                <h2><span id="{$categoryName|webalize}" class="anchor"></span>{$categoryName}</h2>
                 <div class="row">
                     <div n:foreach="$products as $product" class="col-xl-4 col-lg-6 col-md-12 product">
                         <div class="card text-center">
