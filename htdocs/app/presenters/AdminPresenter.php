@@ -402,7 +402,7 @@ class AdminPresenter extends Presenter
     {
         $user = $this->userModel->getUserById($userId);
         $this->userModel->changeUserStatus($userId, $status);
-        if($status == 1){
+        if($status == 1 && $user->active == 0){
             $mail = new NotificationMail([], $user->email, NotificationMail::ACCOUNT_ACTIVATION, 'SalátyObe - Aktivace účtu');
             $mail->send();
         }
