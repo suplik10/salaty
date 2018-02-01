@@ -87,7 +87,7 @@ class OrderModel
 
     public function getProductIngredientsByDate($date)
     {
-        return $this->db->query("SELECT i2p.weight * p2o.quantity AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY i2p.ingredient_id", $date);
+        return $this->db->query("SELECT i2p.weight * SUM(p2o.quantity) AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY i2p.ingredient_id", $date);
     }
 
     public function getProductOrdersByTerm($dateFrom, $dateTo)
@@ -97,7 +97,7 @@ class OrderModel
 
     public function getProductIngredientsByTerm($dateFrom, $dateTo)
     {
-        return $this->db->query("SELECT i2p.weight * p2o.quantity AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') >= ? AND DATE_FORMAT(p2o.date, '%Y-%m-%d') <= ? GROUP BY i2p.ingredient_id", $dateFrom, $dateTo);
+        return $this->db->query("SELECT i2p.weight * SUM(p2o.quantity) AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') >= ? AND DATE_FORMAT(p2o.date, '%Y-%m-%d') <= ? GROUP BY i2p.ingredient_id", $dateFrom, $dateTo);
     }
 
     public function getUsersOrdersByDate($date)
