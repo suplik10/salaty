@@ -7471,6 +7471,21 @@ label {
 #administrace .nav-pills .nav-link.active {
   background-color: #03bf00; }
 
+@media print {
+  #top-menu {
+    display: none; }
+
+  #admin-menu {
+    display: none; }
+
+  form {
+    display: none; }
+
+  #footer {
+    display: none; }
+
+  #administrace .col-sm-9 {
+    width: 100%; } }
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

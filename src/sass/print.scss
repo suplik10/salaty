@@ -1,0 +1,19 @@
+@media print {
+  #top-menu {
+    display: none;
+  }
+  #admin-menu{
+    display: none;
+  }
+  form{
+    display: none;
+  }
+  #footer{
+    display: none;
+  }
+  #administrace{
+    .col-sm-9{
+      width: 100%;
+    }
+  }
+}
