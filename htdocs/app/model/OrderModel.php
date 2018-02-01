@@ -82,7 +82,7 @@ class OrderModel
 
     public function getProductOrdersByDate($date)
     {
-        return $this->db->query("SELECT p2o.*, p.* FROM product2order AS p2o INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? ", $date);
+        return $this->db->query("SELECT p2o.product_id, p2o.order_id, p2o.product_price, p2o.date, SUM(p2o.quantity) AS quantity, p.* FROM product2order AS p2o INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY p.id", $date);
     }
 
     public function getProductIngredientsByDate($date)
@@ -92,7 +92,7 @@ class OrderModel
 
     public function getProductOrdersByTerm($dateFrom, $dateTo)
     {
-        return $this->db->query("SELECT p2o.*, p.* FROM product2order AS p2o INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') >= ?  AND DATE_FORMAT(p2o.date, '%Y-%m-%d') <= ? ", $dateFrom, $dateTo);
+        return $this->db->query("SELECT p2o.product_id, p2o.order_id, p2o.product_price, p2o.date, SUM(p2o.quantity) AS quantity, p.* FROM product2order AS p2o INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') >= ?  AND DATE_FORMAT(p2o.date, '%Y-%m-%d') <= ? GROUP BY p.id", $dateFrom, $dateTo);
     }
 
     public function getProductIngredientsByTerm($dateFrom, $dateTo)
@@ -100,7 +100,8 @@ class OrderModel
         return $this->db->query("SELECT i2p.weight * p2o.quantity AS total_weight,i2p.product_id, i.name FROM ingredients2product AS i2p INNER JOIN product2order AS p2o ON p2o.product_id = i2p.product_id INNER JOIN ingredients AS i ON i.id = i2p.ingredient_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') >= ? AND DATE_FORMAT(p2o.date, '%Y-%m-%d') <= ? GROUP BY i2p.ingredient_id", $dateFrom, $dateTo);
     }
 
-    public function getUsersOrdersByDate($date){
-        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, p2o.quantity, p2o.product_price FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? ", $date);
+    public function getUsersOrdersByDate($date)
+    {
+        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, SUM(p2o.quantity) AS quantity, p2o.product_price FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY p.id", $date);
     }
 }
