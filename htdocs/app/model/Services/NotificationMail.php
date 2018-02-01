@@ -13,6 +13,7 @@ class NotificationMail
     const
         NEW_REGISTRATION = 'newRegistration.latte',
         ORDER = 'order.latte',
+        ACCOUNT_ACTIVATION = 'accountActivation.latte',
         LOST_PASSWORD = 'lostPassword.latte';
 
     /**

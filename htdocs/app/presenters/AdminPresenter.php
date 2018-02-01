@@ -23,6 +23,7 @@ use Nette\Http\FileUpload;
 use Nette\Utils\DateTime;
 use Nette\Utils\Image;
 use Nette\Utils\Strings;
+use V\Services\NotificationMail;
 
 class AdminPresenter extends Presenter
 {
@@ -399,7 +400,12 @@ class AdminPresenter extends Presenter
 
     public function handleChangeUserStatus($userId, $status)
     {
+        $user = $this->userModel->getUserById($userId);
         $this->userModel->changeUserStatus($userId, $status);
+        if($status == 1){
+            $mail = new NotificationMail([], $user->email, NotificationMail::ACCOUNT_ACTIVATION, 'SalátyObe - Aktivace účtu');
+            $mail->send();
+        }
         $this->flashMessage('Změna proběhla úspěšně.', 'success');
     }
 

@@ -18,6 +18,7 @@
                                 <th>Příjmení</th>
                                 <th>E-mail</th>
                                 <th>Telefon</th>
+                                <th>Firma</th>
                                 <th>Ulice</th>
                                 <th>Město</th>
                                 <th>PSČ</th>
@@ -33,6 +34,7 @@
                                 <td>{$salatyUser->lastname}</td>
                                 <td>{$salatyUser->email}</td>
                                 <td>{$salatyUser->phone}</td>
+                                <td>{$salatyUser->factory ? $salatyUser->factory : '---'}</td>
                                 <td>{$salatyUser->street}</td>
                                 <td>{$salatyUser->city}</td>
                                 <td>{$salatyUser->postalcode}</td>
