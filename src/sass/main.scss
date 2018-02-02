@@ -179,9 +179,11 @@ a:not([href]):not([tabindex]) {
 .logo {
   max-height: 40px;
 }
-
+.modal{
+  z-index: 1080;
+}
 .modal-dialog {
-  z-index: 1051;
+  z-index: 1081;
 }
 
 .navbar-light .navbar-toggler {
