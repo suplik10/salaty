@@ -22,7 +22,6 @@
                                 <th>Ulice</th>
                                 <th>Město</th>
                                 <th>PSČ</th>
-                                <th>Role</th>
                                 <th>Zůstatek</th>
                                 <th></th>
                                 <th></th>
@@ -30,15 +29,14 @@
                             </thead>
                             <tbody>
                             <tr n:foreach="$salatyUsers as $salatyUser">
-                                <td>{$salatyUser->firstname}</td>
-                                <td>{$salatyUser->lastname}</td>
-                                <td>{$salatyUser->email}</td>
+                                <td><a href="{plink Admin:userDetail, userId => $salatyUser->id}">{$salatyUser->firstname}</a></td>
+                                <td><a href="{plink Admin:userDetail, userId => $salatyUser->id}">{$salatyUser->lastname}</a></td>
+                                <td><a href="{plink Admin:userDetail, userId => $salatyUser->id}">{$salatyUser->email}</a></td>
                                 <td>{$salatyUser->phone}</td>
                                 <td>{$salatyUser->factory ? $salatyUser->factory : '---'}</td>
                                 <td>{$salatyUser->street}</td>
                                 <td>{$salatyUser->city}</td>
                                 <td>{$salatyUser->postalcode}</td>
-                                <td>{$salatyUser->role_name}</td>
                                 {var $userBalance =  $salatyUser->wallet_balance - $salatyUser->order_balance}
                                 <td n:class="$userBalance < 0 ? text-danger : text-success">{$userBalance ? $userBalance . ' Kč' : '0 Kč'}</td>
                                 <td n:class="$salatyUser->active == 1 ? text-success : text-danger, align-middle">{$salatyUser->active == 1 ? 'aktivní' : 'neaktivní'}</td>

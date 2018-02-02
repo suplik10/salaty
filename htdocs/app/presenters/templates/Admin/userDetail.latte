@@ -1,8 +1,8 @@
 {block content}
     <div class="container pt30">
         <h1>Seznam objednávek</h1>
-
-        <p n:if="empty($orders)">Nemáte žádné objednávky.</p>
+        <a href="{plink Admin:users, userId => null}" class="btn btn-primary mb15">Zpět</a>
+        <p n:if="empty($orders)">Uživatel nemá žádné objednávky.</p>
 
         <table class="table table-responsive-sm" n:foreach="$orders as $date => $order">
             <thead class="thead-dark">

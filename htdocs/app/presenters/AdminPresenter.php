@@ -97,6 +97,12 @@ class AdminPresenter extends Presenter
     public $dateTo;
 
     /**
+     * @var
+     * @persistent
+     */
+    public $userId;
+
+    /**
      * @var OrderModel
      * @inject
      */
@@ -452,5 +458,9 @@ class AdminPresenter extends Presenter
         $this->dateFrom = $values->dateFrom;
         $this->dateTo = $values->dateTo;
         $this->redrawControl();
+    }
+
+    public function renderUserDetail(){
+        $this->template->orders = $this->orderModel->getUserOrders($this->userId)->fetchAssoc('date[]');
     }
 }
