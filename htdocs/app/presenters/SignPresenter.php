@@ -79,7 +79,7 @@ class SignPresenter extends Presenter
                 'factory' => $values->factory,
                 'link' => 'http://' . $_SERVER['HTTP_HOST'] . $this->presenter->link('Admin:default', ['do' => 'changeUserStatus', 'userId' => $user->id, 'status' => 1])
             ];
-            $mail = new NotificationMail($mailData, 'cheaas@gmail.com', NotificationMail::NEW_REGISTRATION, 'SalátyObe - Nová registrace', $values->email);
+            $mail = new NotificationMail($mailData, 'salatyob@seznam.cz', NotificationMail::NEW_REGISTRATION, 'SalátyObe - Nová registrace', $values->email);
             $mail->send();
             $this->flashMessage('Registrace proběhla úspěšně.', 'success');
             $this->redirect('Homepage:default');
