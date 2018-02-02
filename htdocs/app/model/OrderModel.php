@@ -102,6 +102,6 @@ class OrderModel
 
     public function getUsersOrdersByDate($date)
     {
-        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, SUM(p2o.quantity) AS quantity, p2o.product_price FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY p.id", $date);
+        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, SUM(p2o.quantity) AS quantity, p2o.product_price FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY u.id, p.id", $date);
     }
 }
