@@ -23,9 +23,23 @@
         @media (max-width:600px) {
           padding-right:4px;
           padding-left:4px;
-          font-size:11px;
+          font-size:14px;
         }
       }
+
     }
   }
+}
+@media(max-width: 991px){
+#top-menu{
+  border-bottom: 1px solid $grey;
+  .navbar-nav{
+    display: block;
+    .nav-item{
+      text-align:center;
+      display:block;
+      width: 100%;
+    }
+  }
+}
 }

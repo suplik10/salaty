@@ -7269,8 +7269,17 @@ a.text-dark:focus, a.text-dark:hover {
       #top-menu .navbar-nav .nav-item .nav-link {
         padding-right: 4px;
         padding-left: 4px;
-        font-size: 11px; } }
+        font-size: 14px; } }
 
+@media (max-width: 991px) {
+  #top-menu {
+    border-bottom: 1px solid #757575; }
+    #top-menu .navbar-nav {
+      display: block; }
+      #top-menu .navbar-nav .nav-item {
+        text-align: center;
+        display: block;
+        width: 100%; } }
 #footer {
   background-color: #4c4c4c;
   margin-top: 30px;
