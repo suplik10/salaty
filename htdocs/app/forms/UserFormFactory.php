@@ -9,6 +9,7 @@
 namespace App\Forms;
 
 use Nette\Application\UI\Form;
+use Tracy\Debugger;
 
 class UserFormFactory
 {
@@ -58,6 +59,8 @@ class UserFormFactory
         $form->addSubmit('send', 'Registrovat')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
@@ -95,6 +98,8 @@ class UserFormFactory
             ->setRequired();
         $form->addSubmit('send', 'Odeslat')
             ->setAttribute('class', 'btn btn-primary');
+
+        $form->onSuccess[] = [$this, 'log'];
 
         return $form;
     }
@@ -157,6 +162,7 @@ class UserFormFactory
         $form->addSubmit('send', 'Uložit')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
 
         return $form;
     }
@@ -172,7 +178,13 @@ class UserFormFactory
         $form->addSubmit('send', 'Odeslat')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
 
         return $form;
+    }
+
+    public function log(Form $form){
+        $values = $form->getValues();
+        Debugger::log($values, "form-" . str_replace('\\', "-", $form->getName()));
     }
 }

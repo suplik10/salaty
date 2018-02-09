@@ -11,6 +11,7 @@ namespace App\Forms;
 
 use Nette\Application\UI\Form;
 use Nette\Utils\DateTime;
+use Tracy\Debugger;
 
 class CartFormFactory
 {
@@ -41,7 +42,13 @@ class CartFormFactory
 
         $form->addSubmit('send', 'Přidat do objednávky');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
+    public function log(Form $form){
+        $values = $form->getValues();
+        Debugger::log($values, "form-" . str_replace('\\', "-", $form->getName()));
+    }
 }

@@ -14,6 +14,7 @@ use App\Model\IngredientModel;
 use App\Model\ProductModel;
 use App\Model\UserModel;
 use Nette\Application\UI\Form;
+use Tracy\Debugger;
 
 class AdminFormFactory
 {
@@ -59,6 +60,8 @@ class AdminFormFactory
         $form->addSubmit('send', 'Přidat')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
@@ -71,6 +74,8 @@ class AdminFormFactory
             ->setRequired();
         $form->addSubmit('send', 'Přidat')
             ->setAttribute('class', 'btn btn-primary');
+
+        $form->onSuccess[] = [$this, 'log'];
 
         return $form;
     }
@@ -128,6 +133,8 @@ class AdminFormFactory
         $form->addSubmit('send', 'Uložit')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
@@ -140,6 +147,8 @@ class AdminFormFactory
         }
         $form->addSubmit('send', 'Uložit')
             ->setAttribute('class', 'btn btn-primary');
+
+        $form->onSuccess[] = [$this, 'log'];
 
         return $form;
     }
@@ -187,6 +196,8 @@ class AdminFormFactory
         $form->addSubmit('send', 'Vytvořit')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
@@ -208,6 +219,9 @@ class AdminFormFactory
 
         $form->addSubmit('send', 'Uložit')
             ->setAttribute('class', 'btn btn-primary');
+
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
@@ -238,5 +252,10 @@ class AdminFormFactory
         $form->addSubmit('send', 'Změnit')
             ->setAttribute('class', 'btn btn-primary');
         return $form;
+    }
+
+    public function log(Form $form){
+        $values = $form->getValues();
+        Debugger::log($values, "form-" . str_replace('\\', "-", $form->getName()));
     }
 }
