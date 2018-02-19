@@ -442,6 +442,8 @@ class AdminPresenter extends Presenter
     public function walletSucceeded(Form $form)
     {
         $values = $form->getValues();
+        $values['date'] = new DateTime();
+        $values['filled_by_user_id'] = $this->user->getId();
         $this->walletModel->addMoney($values);
         $this->flashMessage('Přidání do peněženky proběhlo úspěšně.', 'success');
         $this->redirect('Admin:wallet');

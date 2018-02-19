@@ -135,7 +135,7 @@ class UserModel
     public function getAllUsers()
     {
         return $this->db->query("SELECT u.*, ur.name AS role_name, (SELECT SUM(w.money)
-FROM wallet AS w WHERE w.user_id = u.id ) AS wallet_balance, (SELECT SUM(p2o.product_price * p2o.quantity) FROM product2order AS p2o INNER JOIN orders AS o ON o.id = p2o.order_id WHERE o.user_id = u.id) AS order_balance FROM user AS u INNER JOIN user_role AS ur ON ur.id = u.user_role_id ORDER BY u.lastname ASC");
+FROM wallet AS w WHERE w.user_id = u.id ) AS wallet_balance, (SELECT SUM(p2o.product_price * p2o.quantity) FROM product2order AS p2o INNER JOIN orders AS o ON o.id = p2o.order_id WHERE o.user_id = u.id) AS order_balance FROM user AS u INNER JOIN user_role AS ur ON ur.id = u.user_role_id ORDER BY u.lastname, u.id ASC");
     }
 
     public function getUserByEmail($email)

@@ -36,12 +36,14 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Zaplacené částky</th>
+                                    <th>Historie transakcí</th>
+                                    <th class="text-center">Datum</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr n:foreach="$userWallet as $wallet">
                                     <td n:class="$wallet->money < 0 ? text-danger : text-success">{$wallet->money}</td>
+                                    <td class="text-center">{$wallet->date ? $wallet->date->format('d. m. Y H:i') : '---'}</td>
                                 </tr>
                                 </tbody>
                             </table>
