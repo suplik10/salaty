@@ -21606,7 +21606,7 @@ var bootstrap = function(a, b) {
         return a(c || b);
     }, p;
 }), $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip(), $("#lightSlider-main").lightSlider({
+    $.nette.init(), $('[data-toggle="tooltip"]').tooltip(), $("#lightSlider-main").lightSlider({
         item: 1,
         autoWidth: !0,
         controls: !0,
@@ -21678,6 +21678,23 @@ var bootstrap = function(a, b) {
             }
         } ]
     }), $(".select2").select2();
+}), $(".scroll-to-form").click(function(a) {
+    a.preventDefault();
+    var b = 0;
+    $(window).width() > 768 && (b = 80);
+    var c = $(this).attr("href");
+    $("html, body").animate({
+        scrollTop: $(c).offset().top - b
+    }, 600);
+}), $(document).on("change", ".wallet-user", function() {
+    var a = $(".change-user-link").attr("data-link");
+    $.nette.ajax({
+        url: a,
+        type: "POST",
+        data: {
+            userId: $(this).val()
+        }
+    });
 }), function(a, b) {
     "use strict";
     var c = {

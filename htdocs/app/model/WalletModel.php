@@ -28,4 +28,9 @@ class WalletModel
     {
         $this->db->query('INSERT INTO wallet', $data);
     }
+
+    public function getWalletByUser($userId)
+    {
+        return $this->db->query("SELECT * FROM wallet WHERE user_id = ?", $userId);
+    }
 }

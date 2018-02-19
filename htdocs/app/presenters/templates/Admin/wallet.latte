@@ -10,13 +10,14 @@
                     {* PRODUKTY *}
                     <div id="wallet">
                         <h2>Peněženka</h2>
+                        {snippet user-wallet}
                         {form wallet}
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xl-6">
                                         {label user_id}
 
-                                        {input user_id, class=>'select2'}
+                                        {input user_id, class=>'select2 wallet-user'}
                                     </div>
                                 </div>
                             </div>
@@ -31,6 +32,21 @@
                                 </div>
                             </div>
                         {/form}
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Zaplacené částky</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$userWallet as $wallet">
+                                    <td n:class="$wallet->money < 0 ? text-danger : text-success">{$wallet->money}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="change-user-link" data-link="{link changeUser!}"></div>
+                        {/snippet}
                     </div>
                 </div>
             </div>

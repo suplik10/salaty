@@ -201,7 +201,7 @@ class AdminFormFactory
         return $form;
     }
 
-    public function createWallet()
+    public function createWallet($userId)
     {
         $form = new Form();
         $users = $this->userModel->getAllUsers()->fetchAll();
@@ -209,10 +209,10 @@ class AdminFormFactory
         $userData = [];
         foreach ($users as $user) {
             $userBalance = $user->wallet_balance - $user->order_balance;
-            $balance = $userBalance ?  $userBalance . ' Kč' : '0 Kč';
+            $balance = $userBalance ? $userBalance . ' Kč' : '0 Kč';
             $userData[$user->id] = $user->factory ? $user->factory . ' (' . $balance . ')' : $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
         }
-        $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired();
+        $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired()->setDefaultValue($userId);
         $form->addInteger('money', 'Zaplacená částka:')
             ->setAttribute('placeholder', '* Zaplacená částka')
             ->setRequired();
@@ -225,7 +225,8 @@ class AdminFormFactory
         return $form;
     }
 
-    public function createChangeDate($date){
+    public function createChangeDate($date)
+    {
         $form = new Form();
         $form->addText('date', 'Datum:')
             ->setDefaultValue($date)
@@ -237,7 +238,8 @@ class AdminFormFactory
         return $form;
     }
 
-    public function createChangeTerm($dateFrom, $dateTo){
+    public function createChangeTerm($dateFrom, $dateTo)
+    {
         $form = new Form();
         $form->addText('dateFrom', 'Datum od:')
             ->setDefaultValue($dateFrom)
@@ -254,7 +256,8 @@ class AdminFormFactory
         return $form;
     }
 
-    public function log(Form $form){
+    public function log(Form $form)
+    {
         $values = $form->getValues();
         Debugger::log($values, "form-" . str_replace('\\', "-", $form->getName()));
     }

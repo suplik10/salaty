@@ -17,6 +17,7 @@ use App\Model\OrderModel;
 use App\Model\ProductModel;
 use App\Model\UserModel;
 use App\Model\WalletModel;
+use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 use Nette\Http\FileUpload;
@@ -241,6 +242,22 @@ class AdminPresenter extends Presenter
         $this->template->ingredients = $this->orderModel->getProductIngredientsByTerm($this->dateFrom, $this->dateTo)->fetchAll();
     }
 
+    public function renderWallet()
+    {
+        $users = $this->userModel->getAllUsers()->fetchAll();
+        if (isset($users[0]) && empty($this->userId)) {
+            $this->userId = $users[0]['id'];
+        }
+        $this->template->userWallet = $this->walletModel->getWalletByUser($this->userId)->fetchAll();
+    }
+
+    public function handleChangeUser()
+    {
+        $userId = $this->presenter->getRequest()->getPost('userId');
+        $this->userId = $userId;
+        $this->redrawControl();
+    }
+
     protected function createComponentAddNewCategoryForm()
     {
         $form = $this->adminForm->createNewCategoryForm();
@@ -408,7 +425,7 @@ class AdminPresenter extends Presenter
     {
         $user = $this->userModel->getUserById($userId);
         $this->userModel->changeUserStatus($userId, $status);
-        if($status == 1 && $user->active == 0){
+        if ($status == 1 && $user->active == 0) {
             $mail = new NotificationMail([], $user->email, NotificationMail::ACCOUNT_ACTIVATION, 'SalátyObe - Aktivace účtu');
             $mail->send();
         }
@@ -417,7 +434,7 @@ class AdminPresenter extends Presenter
 
     protected function createComponentWallet()
     {
-        $form = $this->adminForm->createWallet();
+        $form = $this->adminForm->createWallet($this->userId);
         $form->onSuccess[] = [$this, 'walletSucceeded'];
         return $form;
     }
@@ -425,42 +442,44 @@ class AdminPresenter extends Presenter
     public function walletSucceeded(Form $form)
     {
         $values = $form->getValues();
-        try {
-            $this->walletModel->addMoney($values);
-            $this->flashMessage('Přidání do peněženky proběhlo úspěšně.', 'success');
-        } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
-        }
+        $this->walletModel->addMoney($values);
+        $this->flashMessage('Přidání do peněženky proběhlo úspěšně.', 'success');
+        $this->redirect('Admin:wallet');
     }
 
-    protected function createComponentChangeDateForm(){
+    protected function createComponentChangeDateForm()
+    {
         $form = $this->adminForm->createChangeDate($this->date);
         $form->onSuccess[] = [$this, 'changeDateSucceeded'];
 
         return $form;
     }
 
-    public function changeDateSucceeded(Form $form){
+    public function changeDateSucceeded(Form $form)
+    {
         $values = $form->getValues();
         $this->date = $values->date;
         $this->redrawControl();
     }
 
-    protected function createComponentChangeTermForm(){
+    protected function createComponentChangeTermForm()
+    {
         $form = $this->adminForm->createChangeTerm($this->dateFrom, $this->dateTo);
         $form->onSuccess[] = [$this, 'changeTermSucceeded'];
 
         return $form;
     }
 
-    public function changeTermSucceeded(Form $form){
+    public function changeTermSucceeded(Form $form)
+    {
         $values = $form->getValues();
         $this->dateFrom = $values->dateFrom;
         $this->dateTo = $values->dateTo;
         $this->redrawControl();
     }
 
-    public function renderUserDetail(){
+    public function renderUserDetail()
+    {
         $this->template->orders = $this->orderModel->getUserOrders($this->userId)->fetchAssoc('date[]');
     }
 }

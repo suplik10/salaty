@@ -1,11 +1,11 @@
 <div class="nav flex-column nav-pills mb15-sm" id="admin-menu" role="tablist" aria-orientation="vertical">
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ordersDay') ? active" id="orders-day-tab" href="{plink Admin:ordersDay, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Objednávky na určitý den</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:userOrdersDay') ? active" id="user-orders-day-tab" href="{plink Admin:userOrdersDay, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Objednávky uživatelů</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ordersTerm') ? active" id="orders-term-tab" href="{plink Admin:ordersTerm, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Objednávky v určitém termínu</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ingredient') ? active" id="ingredients-tab" href="{plink Admin:ingredient, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Ingredience</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:product') ? active" id="products-tab" href="{plink Admin:product, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Produkty</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:category') ? active" id="category-tab" href="{plink Admin:category, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Kategorie
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ordersDay') ? active" id="orders-day-tab" href="{plink Admin:ordersDay, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Objednávky na určitý den</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:userOrdersDay') ? active" id="user-orders-day-tab" href="{plink Admin:userOrdersDay, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Objednávky uživatelů</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ordersTerm') ? active" id="orders-term-tab" href="{plink Admin:ordersTerm, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Objednávky v určitém termínu</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:ingredient') ? active" id="ingredients-tab" href="{plink Admin:ingredient, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Ingredience</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:product') ? active" id="products-tab" href="{plink Admin:product, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Produkty</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:category') ? active" id="category-tab" href="{plink Admin:category, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Kategorie
         produktů</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:users') ? active" id="users-tab" href="{plink Admin:users, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Správa uživatelů</a>
-    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:wallet') ? active" id="wallet-tab" href="{plink Admin:wallet, product_id => null, date => null, dateFrom => null, dateTo => null}" role="tab">Peněženka</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:users') ? active" id="users-tab" href="{plink Admin:users, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Správa uživatelů</a>
+    <a n:class="nav-link, $presenter->isLinkCurrent('Admin:wallet') ? active" id="wallet-tab" href="{plink Admin:wallet, product_id => null, date => null, dateFrom => null, dateTo => null, userId => null}" role="tab">Peněženka</a>
 </div>

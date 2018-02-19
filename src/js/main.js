@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $.nette.init();
     $('[data-toggle="tooltip"]').tooltip();
     $("#lightSlider-main").lightSlider({
         item: 1,
@@ -102,3 +103,21 @@ $(document).ready(function () {
     $('.select2').select2();
 });
 
+$(".scroll-to-form").click(function (e) {
+    e.preventDefault();
+    var divergence = 0;
+    if ($(window).width() > 768) {
+        divergence = 80
+    }
+    var target = $(this).attr("href");
+    $("html, body").animate({scrollTop: $(target).offset().top - divergence}, 600);
+});
+
+$(document).on('change', '.wallet-user', function () {
+    var url = $('.change-user-link').attr('data-link');
+    $.nette.ajax({
+       url: url,
+       type: 'POST',
+       data: {userId: $(this).val()}
+    });
+});
