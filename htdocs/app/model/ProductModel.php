@@ -39,7 +39,7 @@ class ProductModel
      */
     public function getAllProducts()
     {
-        $products = $this->db->query('SELECT p.*, c.name AS category_name FROM product AS p INNER JOIN category AS c ON c.id = p.category_id ORDER BY p.rank ASC');
+        $products = $this->db->query('SELECT p.*, c.name AS category_name FROM product AS p INNER JOIN category AS c ON c.id = p.category_id ORDER BY p.active DESC, p.rank ASC');
         return $products;
     }
 

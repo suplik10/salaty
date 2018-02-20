@@ -36,14 +36,20 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Historie transakcí</th>
-                                    <th class="text-center">Datum</th>
+                                    <th style="width:180px;" class="text-center">Datum</th>
+                                    <th class="text-left">Historie transakcí</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {var $totalMoney = 0}
                                 <tr n:foreach="$userWallet as $wallet">
-                                    <td n:class="$wallet->money < 0 ? text-danger : text-success">{$wallet->money}</td>
+                                    {var $totalMoney = $totalMoney + $wallet->money}
                                     <td class="text-center">{$wallet->date ? $wallet->date->format('d. m. Y H:i') : '---'}</td>
+                                    <td n:class="$wallet->money < 0 ? text-danger : text-success, text-left">{$wallet->money} Kč</td>
+                                </tr>
+                                <tr>
+                                    <th style="border-top:2px solid #ddd;" class="text-center">Celkem:</th>
+                                    <th style="border-top:2px solid #ddd;" class="text-left" >{$totalMoney} Kč</th>
                                 </tr>
                                 </tbody>
                             </table>
