@@ -82,6 +82,8 @@ class UserFormFactory
         $form->addSubmit('send', 'Přihlásit se')
             ->setAttribute('class', 'btn btn-primary');
 
+        $form->onSuccess[] = [$this, 'log'];
+
         return $form;
     }
 
