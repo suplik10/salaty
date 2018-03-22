@@ -35,7 +35,7 @@ class CartModel
      */
     public function getCart($userId)
     {
-        $cart = $this->db->query("SELECT c.id AS cartId, c.date, c.count, p.* FROM cart AS c INNER JOIN product AS p ON p.id = c.product_id WHERE c.user_id = ? ORDER BY date ASC", $userId);
+        $cart = $this->db->query("SELECT c.id AS cartId, c.date, c.count, c.description AS order_description, p.* FROM cart AS c INNER JOIN product AS p ON p.id = c.product_id WHERE c.user_id = ? ORDER BY date ASC", $userId);
         return $cart;
     }
 
@@ -67,5 +67,15 @@ class CartModel
     public function checkCartForSameOrder($date, $userId, $productId)
     {
         return $this->db->query("SELECT * FROM cart WHERE DATE_FORMAT(date, '%Y-%m-%d') = ? AND user_id = ? AND product_id = ?", $date->format('Y-m-d'), $userId, $productId)->fetch();
+    }
+
+    /**
+     * Adding description to user cart
+     * @param $description
+     * @param $userId
+     */
+    public function addDescription($description, $userId)
+    {
+        $this->db->query("UPDATE cart SET description = ? WHERE user_id = ? ", $description, $userId);
     }
 }

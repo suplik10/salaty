@@ -9,8 +9,8 @@
                     <h1>Administrace</h1>
 
                     {* OBJEDNÁVKY *}
-                    <div id="orders-day">
-                        {snippet user-orders-day}
+                    <div id="order-descriptions">
+                        {snippet orders-descriptions}
                         {form changeDateForm}
                             <div class="form-group">
                                 <div class="row">
@@ -26,29 +26,21 @@
                                 </div>
                             </div>
                         {/form}
-                            <h2>Objednávky na {$date->format('d. m. Y')} dle uživatelů</h2>
+                            <h2>Poznámky k objednávkám na {$date->format('d. m. Y')}</h2>
                             <table class="table">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Uživatel</th>
-                                    <th>Produkty</th>
+                                    <th>Jméno</th>
                                     <th>Poznámka</th>
-                                    <th>Celkem cena</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr n:foreach="$usersWithOrders as $userWithOrder">
-                                    {var $totalPrice = 0}
-                                    <td>{$userWithOrder['factory'] ? $userWithOrder['factory'] . ' (' . $userWithOrder['firstname'] . ' ' . $userWithOrder['lastname']  . ')' : $userWithOrder['firstname'] . ' ' . $userWithOrder['lastname'] }</td>
-                                    <td>
-                                        <span n:foreach="$usersWithProducts[$userWithOrder['user_id']] as $userWithProduct">{$userWithProduct['name']}
-                                            x{$userWithProduct['quantity']}{$iterator->isLast() ? ' ' : ', '}{var $totalPrice = $totalPrice + ($userWithProduct['quantity'] * $userWithProduct['product_price'])}</span>
-                                    </td>
-                                    <td>{$userWithOrder['order_description'] ? $userWithOrder['order_description'] : '---'}</td>
-                                    <td>{$totalPrice} Kč</td>
+                                <tr n:foreach="$descriptions as $description">
+                                    <th>{$description->factory ? $description->factory : $description->firstname . ' ' . $description->lastname}</th>
+                                    <td>{$description->description}</td>
                                 </tr>
-                                <tr n:if="empty($usersWithOrders)">
-                                    <td>Na tento den nejsou žádné objednávky.</td>
+                                <tr n:if="empty($descriptions)">
+                                    <td>Na tento datum nejsou žádné poznámky.</td>
                                 </tr>
                                 </tbody>
                             </table>

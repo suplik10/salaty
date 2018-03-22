@@ -84,7 +84,7 @@ body {
 }
 
 .mb15-sm {
-  @media (max-width: 767px){
+  @media (max-width: 767px) {
     margin-bottom: 15px;
   }
 }
@@ -179,13 +179,20 @@ a:not([href]):not([tabindex]) {
 .logo {
   max-height: 40px;
 }
-.modal{
+
+.modal {
   z-index: 1080;
 }
+
 .modal-dialog {
   z-index: 1081;
 }
 
 .navbar-light .navbar-toggler {
   border-color: #fff;
+}
+
+.textarea {
+  resize: none;
+  height: 150px;
 }

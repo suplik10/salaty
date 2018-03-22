@@ -1,7 +1,7 @@
 #top-menu {
   background: $dark-grey;
-  z-index:1060;
-  .navbar-brand{
+  z-index: 1060;
+  .navbar-brand {
     color: #fff;
   }
   .navbar-nav {
@@ -14,32 +14,33 @@
         -o-transition: color 0.5s;
         transition: color 0.5s;
         border-bottom: 2px solid $dark-grey;
-        &:hover{
+        &:hover {
           color: #ddd;
         }
         &.active {
           border-bottom: 2px solid #fff;
         }
-        @media (max-width:600px) {
-          padding-right:4px;
-          padding-left:4px;
-          font-size:14px;
+        @media (max-width: 600px) {
+          padding-right: 4px;
+          padding-left: 4px;
+          font-size: 14px;
         }
       }
 
     }
   }
 }
-@media(max-width: 991px){
-#top-menu{
-  border-bottom: 1px solid $grey;
-  .navbar-nav{
-    display: block;
-    .nav-item{
-      text-align:center;
-      display:block;
-      width: 100%;
+
+@media(max-width: 991px) {
+  #top-menu {
+    border-bottom: 1px solid $grey;
+    .navbar-nav {
+      display: block;
+      .nav-item {
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
     }
   }
-}
 }

@@ -47,7 +47,18 @@ class CartFormFactory
         return $form;
     }
 
-    public function log(Form $form){
+    public function createOrderDescription()
+    {
+        $form = new Form();
+
+        $form->addTextArea('description', 'Poznámka k objednávce:');
+        $form->addSubmit('send', 'Odeslat objednávku');
+
+        return $form;
+    }
+
+    public function log(Form $form)
+    {
         $values = $form->getValues();
         Debugger::log($values, "form-" . str_replace('\\', "-", $form->getName()));
     }

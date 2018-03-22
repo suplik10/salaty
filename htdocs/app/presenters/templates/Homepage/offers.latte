@@ -119,8 +119,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                {form orderDescription}
                     <div class="modal-body">
                         {var $priceTotal = 0}
+                        <div class="form-group row">
+                            <strong>{label description, class=>'col-sm-12 col-form-label'}</strong>
+                            <div class="col-md-12">
+                                {input description, class=>'form-control textarea'}
+                            </div>
+                        </div>
                         <div>
                             <table class="table table-responsive-sm" n:foreach="$cart as $date => $cartProducts">
                                 <thead class="thead-dark">
@@ -148,8 +155,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
-                        <a class="btn btn-primary" href="{link createOrder!}">Potvrdit objednávku</a>
+
+                        {input send, class=>'btn btn-primary'}
                     </div>
+                {/form}
                 {/snippet}
             </div>
         </div>

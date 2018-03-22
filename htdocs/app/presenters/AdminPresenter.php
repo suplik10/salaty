@@ -484,4 +484,14 @@ class AdminPresenter extends Presenter
     {
         $this->template->orders = $this->orderModel->getUserOrders($this->userId)->fetchAssoc('date[]');
     }
+
+    public function renderOrderDescriptions()
+    {
+        if (empty($this->date)) {
+            $date = new DateTime('+1 day');
+            $this->date = $date->format('Y-m-d');
+        }
+        $this->template->date = new DateTime($this->date);
+        $this->template->descriptions = $this->orderModel->getOrderDescriptionsByDate($this->date)->fetchAll();
+    }
 }

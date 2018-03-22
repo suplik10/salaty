@@ -11172,4 +11172,8 @@ a:not([href]):not([tabindex]) {
 .navbar-light .navbar-toggler {
   border-color: #fff; }
 
+.textarea {
+  resize: none;
+  height: 150px; }
+
 /*# sourceMappingURL=main.css.map */

@@ -31,12 +31,13 @@ class OrderModel
      * @param $date
      * @return bool|\Nette\Database\IRow|\Nette\Database\Row
      */
-    public function createOrder($userId, $totalPrice, $date)
+    public function createOrder($userId, $totalPrice, $date, $description)
     {
         $data = [
             'user_id' => $userId,
             'total_price' => $totalPrice,
-            'date' => $date
+            'date' => $date,
+            'description' => $description
         ];
         $this->db->query("INSERT INTO orders", $data);
         $order = $this->db->query("SELECT * FROM orders ORDER BY id DESC LIMIT 1")->fetch();
@@ -102,6 +103,11 @@ class OrderModel
 
     public function getUsersOrdersByDate($date)
     {
-        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, SUM(p2o.quantity) AS quantity, p2o.product_price FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY u.id, p.id", $date);
+        return $this->db->query("SELECT p.*, u.firstname, u.lastname, u.factory, o.user_id, SUM(p2o.quantity) AS quantity, p2o.product_price, o.description AS order_description FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id INNER JOIN product AS p ON p.id = p2o.product_id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? GROUP BY u.id, p.id", $date);
+    }
+
+    public function getOrderDescriptionsByDate($date)
+    {
+        return $this->db->query("SELECT o.description, u.firstname, u.lastname, u.factory FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? AND o.description IS NOT NULL GROUP BY o.id", $date);
     }
 }

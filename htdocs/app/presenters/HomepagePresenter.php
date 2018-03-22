@@ -163,7 +163,6 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     public function handleRemoveProductFromCart($cartId)
     {
         try {
-
             //TODO přidat kontrolu uživatele jestli maže svoje
             $this->cartModel->removeFromCart($cartId);
             // $this->flashMessage('Odebrání z košíku proběhlo úspěšně.', 'success');
@@ -207,30 +206,45 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         }
     }
 
-
-    public function handleCreateOrder()
+    protected function createComponentOrderDescription()
     {
+        $form = $this->cartForm->createOrderDescription();
+        $form->onSuccess[] = [$this, 'orderDescriptionSucceeded'];
 
+        return $form;
+    }
+
+    public function orderDescriptionSucceeded(Nette\Application\UI\Form $form)
+    {
+        $values = $form->getValues();
+        $this->cartModel->addDescription($values->description, $this->user->getId());
+        $this->createOrder();
+    }
+
+    public function createOrder()
+    {
         try {
             $cart = $this->cartModel->getCart($this->user->getId())->fetchAll();
             if (!$cart) {
                 throw new \Exception('Objednávka nesmí být prázdná.');
             }
             $totalPrice = 0;
+            $description = "";
             foreach ($cart as $product) {
                 $totalPrice = $totalPrice + ($product->price * $product->count);
+                $description = $product->order_description;
                 $this->validateOrder($product->date, $product->category_id);
             }
             $date = new Nette\Utils\DateTime();
 
             $mailCart = $this->cartModel->getCart($this->user->getId())->fetchAssoc('date[]');
 
-            $order = $this->orderModel->createOrder($this->user->getId(), $totalPrice, $date);
+            $order = $this->orderModel->createOrder($this->user->getId(), $totalPrice, $date, $description);
             $this->orderModel->addProductsToOrder($cart, $order->id);
             $this->cartModel->removeAllFromCart($this->user->getId());
 
 
-            $mailData= [
+            $mailData = [
                 'cart' => $mailCart,
                 'orderDate' => $date->format('d. m. Y H:i')
             ];
