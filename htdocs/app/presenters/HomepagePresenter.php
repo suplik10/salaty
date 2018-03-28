@@ -264,6 +264,9 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
         $today = new Nette\Utils\DateTime();
         $tomorrow = new Nette\Utils\DateTime('+1 day');
 
+        if ($date->format('Y-m-d') == '2018-03-30' || $date->format('Y-m-d') == '2018-04-02'){
+            throw new \Exception('Na tento datum nelze objednat.');
+        }
         if ($today->format('Y-m-d') >= $date->format('Y-m-d')) {
             throw new \Exception('Na tento datum nelze objednat.');
         }
