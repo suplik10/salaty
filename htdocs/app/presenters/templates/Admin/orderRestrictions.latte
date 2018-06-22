@@ -1,0 +1,72 @@
+{block content}
+    <div class="container-fluid pt15" id="administrace">
+        <div class="row">
+            <div class="col-sm-3 col-md-2">
+                {include "left-menu.latte"}
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <div class="tab-content" id="admin-menuContent">
+                    <h1>Administrace</h1>
+
+                    {* OBJEDNÁVKY *}
+                    <div id="order-descriptions">
+                        {snippet orders-restrictions}
+                            <h2 class="float-left">Omezení objednávek od {$date->format('d. m. Y')}</h2>
+                            <span class="float-right" data-toggle="modal" data-target="#newRestrictionModal"><a
+                                        class="btn btn-primary" data-toggle="tooltip"
+                                        title="Vytvoření nového omezení"><span class="fa fa-plus"></span></a></span>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Datum</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$restrictions as $restriction">
+                                    <th>{$restriction->date->format('d.m. Y')}</th>
+                                    <td><a href="{link deleteRestriction!, $restriction->id}"
+                                           data-toggle="tooltip" title="Zrušit omezení" data-placement="top"><span
+                                                    class="fa fa-times red"></span></a></td>
+                                </tr>
+                                <tr n:if="empty($restrictions)">
+                                    <td>Do budoucna nejsou zadány žádné omezení objednávek.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {*MODAL PRO VYTVOŘENÍ NOVÉHO OMEZENÍ*}
+        <div class="modal fade" id="newRestrictionModal" tabindex="-1" role="dialog" aria-labelledby="newRestrictionModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {snippet new-product}
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="newRestrictionModalLabel">Vytvoření nového omezení
+                            <h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                    </div>
+                    <div class="modal-body">
+                        {form newRestrictionForm}
+                            <div class="form-group">
+                                <div>
+                                    {input date, class=>'form-control'}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {input send}
+                            </div>
+                        {/form}
+                        {/snippet}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

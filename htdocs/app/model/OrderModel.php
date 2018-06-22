@@ -110,4 +110,24 @@ class OrderModel
     {
         return $this->db->query("SELECT o.description, u.firstname, u.lastname, u.factory FROM orders AS o INNER JOIN user AS u ON u.id = o.user_id INNER JOIN product2order AS p2o ON p2o.order_id = o.id WHERE DATE_FORMAT(p2o.date, '%Y-%m-%d') = ? AND o.description IS NOT NULL GROUP BY o.id", $date);
     }
+
+    public function getOrderRestrictionsByDate($date)
+    {
+        return $this->db->query("SELECT * FROM order_restriction AS ors WHERE DATE_FORMAT(ors.date, '%Y-%m-%d') = ?", $date->format('Y-m-d'));
+    }
+
+    public function getAllFutureOrderRestrictions($date)
+    {
+        return $this->db->query("SELECT * FROM order_restriction AS ors WHERE DATE_FORMAT(ors.date, '%Y-%m-%d') >= ? ORDER BY ors.date ASC", $date->format('Y-m-d'));
+    }
+
+    public function deleteOrderRestriction($restrictionId)
+    {
+        $this->db->query("DELETE FROM order_restriction WHERE id = ?", $restrictionId);
+    }
+
+    public function addNewOrderRestriction($date)
+    {
+        $this->db->query("INSERT INTO order_restriction", ['date' => $date->format('Y-m-d')]);
+    }
 }

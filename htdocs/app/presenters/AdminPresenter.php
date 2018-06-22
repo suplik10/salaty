@@ -494,4 +494,41 @@ class AdminPresenter extends Presenter
         $this->template->date = new DateTime($this->date);
         $this->template->descriptions = $this->orderModel->getOrderDescriptionsByDate($this->date)->fetchAll();
     }
+
+    public function renderOrderRestrictions()
+    {
+        $today = new DateTime();
+        $this->template->date = $today;
+        $this->template->restrictions = $this->orderModel->getAllFutureOrderRestrictions($today)->fetchAll();
+    }
+
+    public function handleDeleteRestriction($restrictionId)
+    {
+        $this->orderModel->deleteOrderRestriction($restrictionId);
+        $this->flashMessage('Omezení úspěšně smazáno.', 'success');
+        $this->redirect('this');
+    }
+
+    protected function createComponentNewRestrictionForm()
+    {
+        $form = $this->adminForm->createNewRestriction();
+        $form->onSuccess[] = [$this, 'newRestrictionFormSucceeded'];
+        return $form;
+    }
+
+    public function newRestrictionFormSucceeded(Form $form)
+    {
+        $values = $form->getValues();
+        try {
+            $date = new DateTime($values->date);
+            $restriction = $this->orderModel->getOrderRestrictionsByDate($date)->fetch();
+            if (!empty($restriction)) {
+                throw new \Exception('Toto omezení již existuje.');
+            }
+            $this->orderModel->addNewOrderRestriction($date);
+            $this->flashMessage('Omezení bylo úspěšně přidáno.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+    }
 }

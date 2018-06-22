@@ -14,6 +14,7 @@ use App\Model\IngredientModel;
 use App\Model\ProductModel;
 use App\Model\UserModel;
 use Nette\Application\UI\Form;
+use Nette\Utils\DateTime;
 use Tracy\Debugger;
 
 class AdminFormFactory
@@ -210,7 +211,8 @@ class AdminFormFactory
         foreach ($users as $user) {
             $userBalance = $user->wallet_balance - $user->order_balance;
             $balance = $userBalance ? $userBalance . ' Kč' : '0 Kč';
-            $userData[$user->id] = $user->factory ? $user->factory . ' (' . $balance . ')' : $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
+            //$userData[$user->id] = $user->factory ? $user->factory . ' (' . $balance . ')' : $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
+            $userData[$user->id] = $user->firstname . ' ' . $user->lastname . ' (' . $balance . ')';
         }
         $form->addSelect('user_id', 'Uživatel:', $userData)->setRequired()->setDefaultValue($userId);
         $form->addInteger('money', 'Zaplacená částka:')
@@ -253,6 +255,21 @@ class AdminFormFactory
 
         $form->addSubmit('send', 'Změnit')
             ->setAttribute('class', 'btn btn-primary');
+        return $form;
+    }
+
+    public function createNewRestriction()
+    {
+        $form = new Form();
+        $today = new DateTime();
+        $form->addText('date', 'Datum omezení:')
+            ->setDefaultValue($today->format('Y-m-d'))
+            ->setHtmlType('date')
+            ->setRequired();
+        $form->addSubmit('send', 'Uložit')
+            ->setAttribute('class', 'btn btn-primary');
+
+        $form->onSuccess[] = [$this, 'log'];
         return $form;
     }
 
