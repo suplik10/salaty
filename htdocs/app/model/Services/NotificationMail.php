@@ -86,7 +86,7 @@ class NotificationMail
         if (!empty($this->bcc)) {
             $mail->addBcc($this->bcc);
         }
-        $mail->addBcc('cheaas@gmail.com');
+        //$mail->addBcc('cheaas@gmail.com');
 
         $mailer = new SendmailMailer();
         $mailer->send($mail);
