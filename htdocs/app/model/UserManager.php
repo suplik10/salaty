@@ -12,7 +12,7 @@ use Nette\Security\AuthenticationException;
 use Nette\Security\Identity;
 use Nette\Security\Passwords;
 
-class UserManager extends \Nette\Object implements \Nette\Security\IAuthenticator
+class UserManager implements \Nette\Security\IAuthenticator
 {
 
     /**
